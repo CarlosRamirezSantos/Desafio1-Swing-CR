@@ -1,96 +1,219 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import url('https://fonts.googleapis.com/css?family=Oswald:400,700|Montserrat:700|Inter:300,400&display=swap');
+@import url('./variables.css');
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+html, body {
+  width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
+  background-color: var(--crema-vintage);
+  font-family: 'Inter', sans-serif;
+  color: var(--azul-medianoche);
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  width: 100%;
+  background: var(--azul-medianoche);
+  border-bottom: 2.5px solid var(--gris-ui);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1.2em 3vw 1.2em 3vw;
+  min-height: 90px; 
+  margin-bottom: 2.2rem;
+}
+
+.navbar__logo {
+  margin-right: 3rem;
+  display: flex;
+  align-items: center;
+}
+
+.navbar__logo-img {
+  height: 48px;
+  width: auto;
+  display: block;
+}
+
+.navbar__menu {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  gap: 2.6rem;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar__menu li {
+  display: flex;
+  align-items: center;
+}
+
+.navbar__link {
+  font-family: 'Oswald', Arial, sans-serif;
+  font-size: 1.35rem;
+  color: var(--amarillo-dorado);
+  background: none;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition: border-bottom 0.18s, color 0.18s;
+  padding-bottom: 0.09em;
+  border-bottom: 2.5px solid transparent;
+}
+
+.navbar__link:hover,
+.navbar__link--activo {
+  color: var(--amarillo-dorado);
+  border-bottom: 2.5px solid var(--amarillo-dorado);
+}
+
+main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+.form-evento {
+  background-color: var(--gris-ui);
+  border-radius: 26px;
+  padding: 3.7rem 2.1rem;
+  box-shadow: 0 4px 32px rgb(0 0 0 / .15);
+  max-width: 650px;
+  width: 100%;
+  margin: 38px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+  box-sizing: border-box;
+}
+.form-evento h2 {
+  font-family: 'Montserrat', 'Oswald', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 2.4rem;
+  letter-spacing: 1.25px;
+  text-align: center;
+  margin-bottom: 0.6em;
+  color: var(--azul-medianoche);
+}
+.form-evento__tipo {
+  display: flex;
+  justify-content: center;
+  gap: 2.25rem;
+  font-family: 'Oswald', sans-serif;
+  color: var(--azul-medianoche);
+  font-size: 1.13rem;
+  margin-bottom: 0.6rem;
+}
+.form-evento__tipo label {
+  cursor: pointer;
+}
+.form-evento__grupo,
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+}
+.form-evento__grupo label,
+.form-fields label {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 1.08rem;
+  color: var(--azul-medianoche);
+}
+.form-evento__grupo--inline {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 2.8rem;
+  margin-bottom: 0.7em;
+}
+.form-evento__grupo--inline label {
   margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 1.08rem;
+  color: var(--azul-medianoche);
+  min-width: 110px;
+  max-width: 200px;
+  width: auto;
 }
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.form-evento__grupo--inline label:not(:first-child):has(input[type="checkbox"]) {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 1.08rem;
+  min-width: 96px;
 }
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.form-evento__grupo--inline input[type="number"],
+.form-evento__grupo--inline input[type="time"] {
+  min-width: 110px;
+  font-size: 1.08rem;
+  margin-top: 0.13em;
+  width: 100%;
+  box-sizing: border-box;
 }
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.form-evento__grupo--inline input[type="checkbox"] {
+  margin-right: 0.4em;
+  transform: scale(1.22);
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+input[type="text"],
+input[type="number"],
+input[type="time"],
+select,
+textarea {
+  border: 2px solid var(--gris-texto);
+  border-radius: 10px;
+  padding: 0.9em 1.15em;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.16rem;
+  outline-offset: 2px;
+  transition: border-color 0.20s;
+  background: #fff;
+  width: 100%;
+  box-sizing: border-box;
 }
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #f7df1eaa);
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--amarillo-dorado);
+  box-shadow: 0 0 0 2px var(--amarillo-dorado);
 }
-
-.card {
-  padding: 2em;
+textarea {
+  resize: vertical;
+  font-family: 'Inter', sans-serif;
 }
-
-.read-the-docs {
-  color: #888;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+button[type="submit"] {
+  background-color: var(--amarillo-dorado);
+  border: none;
+  border-radius: 11px;
+  box-shadow: 0 2px 12px rgb(179 57 81 / 0.19);
+  color: #fff;
   cursor: pointer;
-  transition: border-color 0.25s;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 1.32rem;
+  letter-spacing: 1.13px;
+  padding: 0.95em 1em;
+  text-transform: uppercase;
+  transition: background 0.19s;
+  margin-top: 1rem;
 }
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+button[type="submit"]:hover,
+button[type="submit"]:focus {
+  background-color: var(--verde-oliva);
 }
