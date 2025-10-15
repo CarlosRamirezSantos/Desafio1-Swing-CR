@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro de evento</title>
+  <link rel="icon" type="image/png" href="assets/imagenes/Logo.png">
+  <link rel="stylesheet" href="src/variables.css">
+  <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar__logo">
+      <img src="assets/imagenes/Logo.png" alt="Logo swingCR" class="navbar__logo-img">
+    </div>
+    <ul class="navbar__menu">
+      <li><a href="#" class="navbar__link navbar__link">Inicio</a></li>
+      <li><a href="#" class="navbar__link">Mis eventos</a></li>
+    </ul>
+  </nav>
+  <main>
+    <form class="form-evento">
+      <h2>Registra tu evento</h2>
+      <div class="form-evento__tipo">
+        <label><input type="radio" name="tipoEvento" value="clase" checked> Clase</label>
+        <label><input type="radio" name="tipoEvento" value="actividad"> Actividad</label>
+      </div>
+      <div class="form-evento__grupo form-evento__grupo--inline">
+        <label>Día
+          <input type="number" min="10" max="12" value="10">
+        </label>
+        <label>Hora
+          <input type="time" value="20:00">
+        </label>
+      </div>
+      <div class="form-evento__grupo">
+        <label>Nombre del organizador
+          <input type="text" value="" placeholder="Carlos Ramírez" required>
+        </label>
+      </div>
+      <div class="form-evento__grupo">
+        <label>Ubicaciones disponibles
+          <select>
+            <option>Be Hopper</option>
+            <option>New Orleans</option>
+            <option>Savoy</option>
+            <option>Antiguo Casino</option>
+            <option>Parque de Gasset</option>
+            <option>Prado</option>
+          </select>
+        </label>
+      </div>
+      <div class="form-evento__grupo">
+        <label>Estilo
+          <select>
+            <option>Lindy Hop</option>
+            <option>Shag</option>
+            <option>Solo Jazz</option>
+          </select>
+        </label>
+      </div>
+      <div class="form-evento__grupo">
+        <label>Nivel
+          <select>
+            <option>Básico</option>
+            <option>Intermedio</option>
+            <option>Avanzado</option>
+          </select>
+        </label>
+      </div>
+      <div class="form-evento__grupo">
+        <label>Tipo de actividad
+          <select>
+            <option>Taster</option>
+            <option>Social</option>
+            <option>Concierto</option>
+            <option>Mix & Match</option>
+          </select>
+        </label>
+      </div>
+      <div class="form-evento__grupo form-evento__grupo--inline">
+        <label>Duración (min)
+          <input type="number" min="0" value="60">
+        </label>
+        <label>
+          <input type="checkbox"> Profesor
+        </label>
+        <label>
+          <input type="checkbox"> Banda
+        </label>
+      </div>
+      <div class="form-evento__grupo">
+        <label for="Descripción">Descripción opcional</label>
+        <textarea id="Descripción" name="Descripción" placeholder="El evento consiste en ..." rows="4"></textarea>
+      </div>
+      <button type="submit">Registrar evento</button>
+    </form>
+  </main>
+</body>
+</html>
