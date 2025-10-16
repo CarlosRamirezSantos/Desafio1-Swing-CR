@@ -1,11 +1,12 @@
 export class Evento {
-  constructor({ id, nombre, descripcion, salaId, dia, hora, duracion }) {
+  constructor({ id, nombre, ubicacion, estilo, dia, hora, duracion, profesor }) {
     this.id = id;
     this.nombre = nombre;
-    this.descripcion = descripcion;
-    this.salaId = salaId;
+    this.ubicacion = ubicacion;
+    this.estilo = estilo; 
     this.dia = dia;
     this.hora = hora;
-    this.duracion = duracion; // en minutos
+    this.duracion = duracion;
+    this.profesor = !!profesor;
   }
 }
