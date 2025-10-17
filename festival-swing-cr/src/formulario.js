@@ -1,6 +1,7 @@
-//localStorage.clear();
+//localStorage.clear()
 
 document.addEventListener('DOMContentLoaded', function() {
+
   const radioClase = document.getElementById('radioClase');
   const radioActividad = document.getElementById('radioActividad');
   const formEvento = document.querySelector('.form-evento');
@@ -19,14 +20,26 @@ document.addEventListener('DOMContentLoaded', function() {
   const nivelSelect = document.getElementById('nivel');
   const tipoActividadSelect = document.getElementById('tipoActividad');
 
+  const contenedorMensaje = document.getElementById("mensaje-error");
+
+  const horasDisponibles = [
+    '10:00', '11:00', '12:00', '13:00', '14:00',
+    '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00'
+  ];
+  const ubicaciones = [
+      'Be Hopper', 'New Orleans', 'Savoy', 
+      'Antiguo Casino', 'Parque de Gasset', 'Prado'
+    ];
+
   function setDisabledField(grupo, disabled) {
     if (!grupo) return;
     const inputs = grupo.querySelectorAll('input, select, textarea');
-    inputs.forEach(input => {
+    for (let i = 0; i < inputs.length; i++) {
+      const input = inputs[i];
       if (input !== profesorCheckbox && input !== duracionInput) {
         input.disabled = disabled;
       }
-    });
+    }
   }
 
   function actualizarCampos() {
@@ -47,16 +60,76 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  function actualizarSelectUbicacion() {
+    
+    const eventos = JSON.parse(localStorage.getItem('eventos')) || [];
+    const dia = parseInt(diaSelect.value, 10);
+    const hora = horaSelect.value;
+    const duracion = parseInt(duracionInput.value, 10);
+
+    let indiceHora = -1;
+    for (let i = 0; i < horasDisponibles.length; i++) {
+      if (horasDisponibles[i] === hora) {
+        indiceHora = i;
+        break;
+      }
+    }
+
+    let siguienteHora = null;
+    if (duracion === 120 && indiceHora >= 0 && indiceHora < horasDisponibles.length - 1) {
+      siguienteHora = horasDisponibles[indiceHora + 1];
+    }
+
+    let ubicacionesOcupadas = [];
+    let mensajeError = "";
+
+    for (let i = 0; i < eventos.length; i++) {
+      let evento = eventos[i];
+      if (evento.dia === dia) {
+        if (evento.hora === hora) {
+          ubicacionesOcupadas.push(evento.ubicacion);
+        }
+        if (siguienteHora !== null && evento.hora === siguienteHora) {
+
+          ubicacionesOcupadas.push(evento.ubicacion);
+          mensajeError = "Error: Ubicación ocupada a la " + siguienteHora + ". Seleccione otra";
+        }
+      }
+    }
+
+    if (mensajeError) {
+      contenedorMensaje.textContent = mensajeError;
+    } else {
+      contenedorMensaje.textContent = "";
+    }
+  
+    ubicacionSelect.innerHTML = '';
+
+    for (let j = 0; j < ubicaciones.length; j++) {
+      if (ubicacionesOcupadas.includes(ubicaciones[j]) === -1) {
+        let option = document.createElement('option');
+        option.value = ubicaciones[j];
+        option.textContent = ubicaciones[j];
+        ubicacionSelect.appendChild(option);
+      }
+    }
+  }
+
   radioClase.addEventListener('change', actualizarCampos);
   radioActividad.addEventListener('change', actualizarCampos);
 
+  diaSelect.addEventListener('change', actualizarSelectUbicacion);
+  horaSelect.addEventListener('change', actualizarSelectUbicacion);
+  duracionInput.addEventListener('change', actualizarSelectUbicacion);
+
   actualizarCampos();
+  actualizarSelectUbicacion();
 
   formEvento.addEventListener('submit', function(e) {
     e.preventDefault();
 
     const evento = {
-      id: Date.now(), 
+      id: Date.now(),
       tipo: radioClase.checked ? "clase" : "actividad",
       nombre: document.getElementById("nombre").value.trim(),
       ubicacion: ubicacionSelect.value,
@@ -65,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
       duracion: parseInt(duracionInput.value, 10),
       estilo: estiloSelect.value,
       descripcion: descripcion.value.trim(),
-      profesor: profesorCheckbox.checked,
+      profesores: profesorCheckbox.checked,
       banda: bandaCheckbox.checked
     };
 
@@ -76,13 +149,13 @@ document.addEventListener('DOMContentLoaded', function() {
       evento.tipoActividad = tipoActividadSelect.value;
     }
 
-    
     const eventos = JSON.parse(localStorage.getItem('eventos')) || [];
     eventos.push(evento);
     localStorage.setItem('eventos', JSON.stringify(eventos));
-
-    alert('Evento guardado correctamente');
+    
+    alert('Evento guardado en correctamente'); 
     formEvento.reset();
     actualizarCampos();
+    actualizarSelectUbicacion();
   });
 });
