@@ -217,11 +217,3 @@ button[type="submit"]:hover,
 button[type="submit"]:focus {
   background-color: var(--verde-oliva);
 }
-
-#mensaje-error {
-  color: red;
-  font-weight: bold;
-  margin-top: 1rem;
-  text-align: center;
-  min-height: 1.5em;
-}
