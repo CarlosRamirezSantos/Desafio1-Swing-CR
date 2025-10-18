@@ -1,6 +1,6 @@
-import { Clase } from './models/Clase.js';
-import { Actividad } from './models/Actividad.js';
-// localStorage.clear() 
+import { Clase } from "./models/Clase.js";
+import { Actividad } from "./models/Actividad.js";
+// localStorage.clear()
 document.addEventListener("DOMContentLoaded", function () {
   const radioClase = document.getElementById("radioClase");
   const radioActividad = document.getElementById("radioActividad");
@@ -21,10 +21,15 @@ document.addEventListener("DOMContentLoaded", function () {
   const tipoActividadSelect = document.getElementById("tipoActividad");
 
   const ubicaciones = [
-    "Be Hopper", "New Orleans", "Savoy", "Antiguo Casino", "Parque de Gasset", "Prado",
+    "Be Hopper",
+    "New Orleans",
+    "Savoy",
+    "Antiguo Casino",
+    "Parque de Gasset",
+    "Prado",
   ];
 
-   const horasDisponibles = [
+  const horasDisponibles = [
     "10:00",
     "11:00",
     "12:00",
@@ -39,15 +44,15 @@ document.addEventListener("DOMContentLoaded", function () {
     "22:00",
   ];
 
-  const setDisabledField = function(grupo, disabled) {
+  const setDisabledField = function (grupo, disabled) {
     if (!grupo) return;
     const inputs = grupo.querySelectorAll("input, select, textarea");
-    inputs.forEach(input => {
+    inputs.forEach((input) => {
       input.disabled = disabled;
     });
-  }
+  };
 
-  const actualizarCampos = function() {
+  const actualizarCampos = function () {
     if (radioClase.checked) {
       setDisabledField(grupoNivel, false);
       setDisabledField(grupoTipoActividad, true);
@@ -63,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
       profesorCheckbox.disabled = false;
       duracionInput.disabled = false;
     }
-  }
+  };
 
   const actualizarSelectUbicacion = function () {
     const eventos = JSON.parse(localStorage.getItem("eventos")) || [];
@@ -75,11 +80,11 @@ document.addEventListener("DOMContentLoaded", function () {
     for (let evento of eventos) {
       if (evento.dia === dia) {
         let indiceEventoHora = horasDisponibles.indexOf(evento.hora);
-        
+
         if (evento.hora === hora) {
           ubicacionesOcupadas.push(evento.ubicacion);
         }
-      
+
         if (
           evento.duracion === 120 &&
           indiceEventoHora >= 0 &&
@@ -110,8 +115,7 @@ document.addEventListener("DOMContentLoaded", function () {
       option.textContent = "No hay ubicaciones libres";
       ubicacionSelect.appendChild(option);
     }
-    
-  }
+  };
 
   radioClase.addEventListener("change", actualizarCampos);
   radioActividad.addEventListener("change", actualizarCampos);
@@ -152,7 +156,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const eventosGuardados = JSON.parse(localStorage.getItem("eventos")) || [];
     eventosGuardados.push(evento);
     localStorage.setItem("eventos", JSON.stringify(eventosGuardados));
-    alert("Evento guardado correctamente");
+
+    mensajeEvento.textContent = "Evento guardado correctamente";
+    setTimeout(() => {
+      mensajeEvento.textContent = "";
+    }, 3000);
     formEvento.reset();
     actualizarCampos();
     actualizarSelectUbicacion();
