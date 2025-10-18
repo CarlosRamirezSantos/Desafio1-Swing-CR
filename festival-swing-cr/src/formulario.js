@@ -29,21 +29,17 @@ document.addEventListener("DOMContentLoaded", function () {
     "Prado",
   ];
 
-  const horasDisponibles = [
-    "10:00",
-    "11:00",
-    "12:00",
-    "13:00",
-    "14:00",
-    "16:00",
-    "17:00",
-    "18:00",
-    "19:00",
-    "20:00",
-    "21:00",
-    "22:00",
-  ];
+   function generarHoras(inicio, fin) {
+    const horas = [];
+    for (let h = inicio; h <= fin; h++) {
+      let horaStr = h.toString().padStart(2, '0') + ':00';
+      horas.push(horaStr);
+    }
+    return horas;
+  }
 
+  const horasDisponibles = generarHoras(10, 23);
+  
   const setDisabledField = function (grupo, disabled) {
     if (!grupo) return;
     const inputs = grupo.querySelectorAll("input, select, textarea");
