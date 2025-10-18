@@ -218,10 +218,8 @@ button[type="submit"]:focus {
   background-color: var(--verde-oliva);
 }
 
-#mensaje-error {
-  color: red;
+#mensajeEvento {
+  color: rgb(7, 147, 7);
+  margin-top: 10px;
   font-weight: bold;
-  margin-top: 1rem;
-  text-align: center;
-  min-height: 1.5em;
 }
