@@ -123,6 +123,8 @@ document.addEventListener("DOMContentLoaded", function () {
       option.textContent = "No hay horas disponibles";
       horaSelect.appendChild(option);
     }
+    
+    actualizarSelectDuracion();
   };
 
   const actualizarSelectUbicacion = function () {
@@ -177,6 +179,33 @@ document.addEventListener("DOMContentLoaded", function () {
       option.textContent = "No hay salas libres";
       ubicacionSelect.appendChild(option);
     }
+    
+    actualizarSelectDuracion();
+  };
+
+  
+  const actualizarSelectDuracion = function () {
+    const horaSeleccionada = horaSelect.value;
+    const horasConDuracionRestringida = ["14:00", "23:00"];
+
+    duracionInput.innerHTML = "";
+
+    if (horasConDuracionRestringida.includes(horaSeleccionada)) {
+      const option = document.createElement("option");
+      option.value = "60";
+      option.textContent = "60";
+      duracionInput.appendChild(option);
+    } else {
+      const option60 = document.createElement("option");
+      option60.value = "60";
+      option60.textContent = "60";
+      duracionInput.appendChild(option60);
+
+      const option120 = document.createElement("option");
+      option120.value = "120";
+      option120.textContent = "120";
+      duracionInput.appendChild(option120);
+    }
   };
 
   radioClase.addEventListener("change", actualizarCampos);
@@ -186,12 +215,16 @@ document.addEventListener("DOMContentLoaded", function () {
     actualizarSelectHora();
     actualizarSelectUbicacion();
   });
-  horaSelect.addEventListener("change", actualizarSelectUbicacion);
+  horaSelect.addEventListener("change", () => {
+    actualizarSelectUbicacion();
+  });
+  
   duracionInput.addEventListener("change", () => {
     actualizarSelectHora();
     actualizarSelectUbicacion();
   });
 
+  
   actualizarCampos();
   actualizarSelectHora();
   actualizarSelectUbicacion();
