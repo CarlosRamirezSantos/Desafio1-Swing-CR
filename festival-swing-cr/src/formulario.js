@@ -1,6 +1,6 @@
 import { Clase } from "./models/Clase.js";
 import { Actividad } from "./models/Actividad.js";
-// localStorage.clear()
+localStorage.clear()
 document.addEventListener("DOMContentLoaded", function () {
   const radioClase = document.getElementById("radioClase");
   const radioActividad = document.getElementById("radioActividad");
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "Prado",
   ];
 
-  function generarHoras(inicio, fin) {
+  const generarHoras = function(inicio, fin) {
     const horas = [];
     for (let h = inicio; h <= fin; h++) {
       let horaStr = h.toString().padStart(2, '0') + ':00';
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   const horasDisponibles = generarHoras(10, 23);
 
- function generarOpcionesHoras() {
+  const generarOpcionesHoras = function() {
     horaSelect.innerHTML = "";
     for (let hora of horasDisponibles) {
       let option = document.createElement("option");
@@ -75,6 +75,64 @@ document.addEventListener("DOMContentLoaded", function () {
       duracionInput.disabled = false;
     }
   };
+
+const obtenerHorasConSalasLibres = function() {
+  
+  const eventos = JSON.parse(localStorage.getItem("eventos")) || [];
+  const diaSeleccionado = parseInt(diaSelect.value, 10);
+  const horasFiltradas = [];
+
+  for (let hora of horasDisponibles) {
+    let ubicacionesOcupadas = [];
+
+    for (let evento of eventos) {
+      if (evento.dia === diaSeleccionado) {
+        let indiceEvento = horasDisponibles.indexOf(evento.hora);
+        let siguienteHora = horasDisponibles[indiceEvento + 1];
+
+        if (evento.hora === hora) {
+          ubicacionesOcupadas.push(evento.ubicacion);
+        }
+
+        if (evento.duracion === 120 && siguienteHora === hora) {
+          ubicacionesOcupadas.push(evento.ubicacion);
+        }
+      }
+    }
+
+    let ubicacionesLibres = [];
+    for (let ubicacion of ubicaciones) {
+      if (!ubicacionesOcupadas.includes(ubicacion)) {
+        ubicacionesLibres.push(ubicacion);
+      }
+    }
+
+    if (ubicacionesLibres.length > 0) {
+      horasFiltradas.push(hora);
+    }
+  }
+
+  return horasFiltradas;
+};
+
+const actualizarSelectHora = function() {
+
+    const horasLibres = obtenerHorasConSalasLibres();
+
+    horaSelect.innerHTML = "";
+    for (let hora of horasLibres) {
+      let option = document.createElement("option");
+      option.value = hora;
+      option.textContent = hora;
+      horaSelect.appendChild(option);
+    }
+    if (horasLibres.length === 0) {
+      let option = document.createElement("option");
+      option.value = "";
+      option.textContent = "No hay horas disponibles";
+      horaSelect.appendChild(option);
+    }
+  }
 
   const actualizarSelectUbicacion = function () {
     const eventos = JSON.parse(localStorage.getItem("eventos")) || [];
@@ -115,27 +173,29 @@ document.addEventListener("DOMContentLoaded", function () {
         ubicacionLibre = true;
       }
     }
-    if (!ubicacionLibre) {
-      let option = document.createElement("option");
-      option.value = "";
-      option.textContent = "No hay ubicaciones libres";
-      ubicacionSelect.appendChild(option);
-    }
   };
 
   radioClase.addEventListener("change", actualizarCampos);
   radioActividad.addEventListener("change", actualizarCampos);
 
-  diaSelect.addEventListener("change", actualizarSelectUbicacion);
+  diaSelect.addEventListener("change", () => {
+    actualizarSelectHora();
+    actualizarSelectUbicacion();
+  });
   horaSelect.addEventListener("change", actualizarSelectUbicacion);
-  duracionInput.addEventListener("change", actualizarSelectUbicacion);
+  duracionInput.addEventListener("change", () => {
+    actualizarSelectHora();
+    actualizarSelectUbicacion();
+  });
 
   generarOpcionesHoras();
   actualizarCampos();
+  actualizarSelectHora();
   actualizarSelectUbicacion();
 
   formEvento.addEventListener("submit", function (e) {
     e.preventDefault();
+
     const datosComunes = {
       id: Date.now(),
       nombre: document.getElementById("nombre").value.trim(),
@@ -146,7 +206,9 @@ document.addEventListener("DOMContentLoaded", function () {
       duracion: parseInt(duracionInput.value, 10),
       profesor: profesorCheckbox.checked,
     };
+
     let evento;
+
     if (radioClase.checked) {
       evento = new Clase({
         ...datosComunes,
@@ -160,6 +222,7 @@ document.addEventListener("DOMContentLoaded", function () {
         descripcion: descripcion.value.trim(),
       });
     }
+
     const eventosGuardados = JSON.parse(localStorage.getItem("eventos")) || [];
     eventosGuardados.push(evento);
     localStorage.setItem("eventos", JSON.stringify(eventosGuardados));
@@ -169,7 +232,9 @@ document.addEventListener("DOMContentLoaded", function () {
       mensajeEvento.textContent = "";
     }, 3000);
     formEvento.reset();
+
     actualizarCampos();
+    actualizarSelectHora();
     actualizarSelectUbicacion();
   });
 });
