@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
       option.textContent = "No hay horas disponibles";
       horaSelect.appendChild(option);
     }
-    
+    actualizarSelectUbicacion();
     actualizarSelectDuracion();
   };
 
@@ -179,18 +179,62 @@ document.addEventListener("DOMContentLoaded", function () {
       option.textContent = "No hay salas libres";
       ubicacionSelect.appendChild(option);
     }
-    
     actualizarSelectDuracion();
   };
 
-  
   const actualizarSelectDuracion = function () {
     const horaSeleccionada = horaSelect.value;
+    const ubicacionSeleccionada = ubicacionSelect.value;
+    const eventos = JSON.parse(localStorage.getItem("eventos")) || [];
+
+    if (
+      !horaSeleccionada ||
+      horaSeleccionada === "No hay horas disponibles" ||
+      !ubicacionSeleccionada ||
+      ubicacionSeleccionada === "" ||
+      ubicacionSeleccionada === "No hay salas libres"
+    ) {
+      const horasConDuracionRestringida = ["14:00", "23:00"];
+      duracionInput.innerHTML = "";
+      if (horasConDuracionRestringida.includes(horaSeleccionada)) {
+        duracionInput.innerHTML = '<option value="60">60</option>';
+      } else {
+        duracionInput.innerHTML = `
+          <option value="60">60</option>
+          <option value="120">120</option>
+        `;
+      }
+      return;
+    }
+
+    
     const horasConDuracionRestringida = ["14:00", "23:00"];
+    if (horasConDuracionRestringida.includes(horaSeleccionada)) {
+      duracionInput.innerHTML = '<option value="60">60</option>';
+      return;
+    }
+
+    
+    const indiceHoraActual = horasDisponibles.indexOf(horaSeleccionada);
+    const esUltimaHora = indiceHoraActual === horasDisponibles.length - 1;
+
+    let hayEventoEnSiguienteHoraEnMismaSala = false;
+    if (!esUltimaHora) {
+      const siguienteHora = horasDisponibles[indiceHoraActual + 1];
+      for (let evento of eventos) {
+        if (
+          evento.dia === parseInt(diaSelect.value, 10) &&
+          evento.hora === siguienteHora &&
+          evento.ubicacion === ubicacionSeleccionada
+        ) {
+          hayEventoEnSiguienteHoraEnMismaSala = true;
+          break;
+        }
+      }
+    }
 
     duracionInput.innerHTML = "";
-
-    if (horasConDuracionRestringida.includes(horaSeleccionada)) {
+    if (esUltimaHora || hayEventoEnSiguienteHoraEnMismaSala) {
       const option = document.createElement("option");
       option.value = "60";
       option.textContent = "60";
@@ -215,10 +259,13 @@ document.addEventListener("DOMContentLoaded", function () {
     actualizarSelectHora();
     actualizarSelectUbicacion();
   });
+
   horaSelect.addEventListener("change", () => {
     actualizarSelectUbicacion();
   });
-  
+
+  ubicacionSelect.addEventListener("change", actualizarSelectDuracion);
+
   duracionInput.addEventListener("change", () => {
     actualizarSelectHora();
     actualizarSelectUbicacion();
