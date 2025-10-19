@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "Prado",
   ];
 
-   function generarHoras(inicio, fin) {
+  function generarHoras(inicio, fin) {
     const horas = [];
     for (let h = inicio; h <= fin; h++) {
       let horaStr = h.toString().padStart(2, '0') + ':00';
@@ -37,9 +37,19 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     return horas;
   }
-
   const horasDisponibles = generarHoras(10, 23);
-  
+
+ function generarOpcionesHoras() {
+    horaSelect.innerHTML = "";
+    for (let hora of horasDisponibles) {
+      let option = document.createElement("option");
+      option.value = hora;
+      option.textContent = hora;
+      horaSelect.appendChild(option);
+    }
+  }
+
+
   const setDisabledField = function (grupo, disabled) {
     if (!grupo) return;
     const inputs = grupo.querySelectorAll("input, select, textarea");
@@ -120,6 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
   horaSelect.addEventListener("change", actualizarSelectUbicacion);
   duracionInput.addEventListener("change", actualizarSelectUbicacion);
 
+  generarOpcionesHoras();
   actualizarCampos();
   actualizarSelectUbicacion();
 
