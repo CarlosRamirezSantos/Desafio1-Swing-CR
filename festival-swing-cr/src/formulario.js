@@ -1,5 +1,8 @@
 import { Clase } from "./models/Clase.js";
 import { Actividad } from "./models/Actividad.js";
+import { ubicaciones, diasConNombre, horasDisponibles } from "./configEventos.js";
+
+
 
 // localStorage.clear();
 
@@ -25,31 +28,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   let ubicacionSeleccionadaPorUsuario = null;
-
-  const ubicaciones = [
-    "Be Hopper",
-    "New Orleans",
-    "Savoy",
-    "Antiguo Casino",
-    "Parque de Gasset",
-    "Prado",
-  ];
-
-  const diasConNombre = [
-    { numero: 10, nombre: "Viernes 10" },
-    { numero: 11, nombre: "Sábado 11" },
-    { numero: 12, nombre: "Domingo 12" },
-  ];
-
-  const generarHoras = function (inicio, fin) {
-    const horas = [];
-    for (let h = inicio; h <= fin; h++) {
-      let horaStr = h.toString().padStart(2, "0") + ":00";
-      horas.push(horaStr);
-    }
-    return horas;
-  };
-  const horasDisponibles = generarHoras(10, 23);
 
   const setDisabledField = function (grupo, disabled) {
     if (!grupo) return;
