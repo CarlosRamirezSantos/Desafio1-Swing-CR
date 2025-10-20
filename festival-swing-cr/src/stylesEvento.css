@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css?family=Oswald:400,700|Montserrat:700|Inter:300,400&display=swap');
 @import url('./variables.css');
 
@@ -138,17 +137,17 @@ main {
   color: var(--azul-medianoche);
   table-layout: fixed;
   margin-top: 0.7rem;
-  min-width: 1440px; 
+  min-width: 1440px;
 }
 
 .tablon-eventos__tabla th,
 .tablon-eventos__tabla td {
   border: 1.5px solid var(--gris-texto);
-  padding: 1rem 0.9rem; 
+  padding: 0.8rem 0.7rem;
   vertical-align: middle;
-  width: 190px;           
+  width: 190px;
   min-width: 190px;
-  max-width: 1fr;
+  height: 50px; 
   box-sizing: border-box;
   word-break: break-word;
 }
@@ -166,11 +165,50 @@ main {
 }
 
 .tablon-eventos__celda-ocupada {
-  background-color: var(--verde-oliva);
-  color: #fff;
+  background-color: var(--gris-ui);
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 1.5px solid var(--gris-texto);
+  box-sizing: border-box;
+  height: 50px;
+}
+
+.tarjeta-evento {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--amarillo-dorado);
+  color: var(--azul-medianoche);
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  line-height: 1.15;
+  font-size: 0.93rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.tarjeta-evento__id {
   font-weight: 600;
-  cursor: default;
-  border: 2px solid var(--azul-medianoche);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.tarjeta-evento__titulo {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.tarjeta-evento__detalle,
+.tarjeta-evento__organizador {
+  font-size: 0.82rem;
+  margin: 0;
+  font-weight: 400;
 }
 
 .tablon-eventos__celda-libre {
@@ -178,3 +216,4 @@ main {
   color: var(--azul-medianoche);
   cursor: default;
 }
+
