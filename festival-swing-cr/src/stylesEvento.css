@@ -70,11 +70,16 @@ body {
   border-bottom: 2.5px solid transparent;
 }
 
-.navbar__link:hover,
-.navbar__link--activo {
+.navbar__link:hover {
   color: var(--amarillo-dorado);
   border-bottom: 2.5px solid var(--amarillo-dorado);
 }
+
+.navbar__link--activo {
+  color: var(--amarillo-dorado);
+  border-bottom: none;
+}
+
 
 main {
   width: 100%;
@@ -143,72 +148,67 @@ main {
 .tablon-eventos__tabla th,
 .tablon-eventos__tabla td {
   border: 1.5px solid var(--gris-texto);
-  padding: 0.8rem 0.7rem;
-  vertical-align: middle;
   width: 190px;
   min-width: 190px;
-  height: 50px; 
+  max-width: 190px;
+  height: 54px;
+  min-height: 54px;
+  max-height: 54px;
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  vertical-align: middle;
   word-break: break-word;
+  text-align: center;
 }
 
 .tablon-eventos__tabla th:first-child,
 .tablon-eventos__tabla td:first-child {
   width: 110px;
   min-width: 110px;
+  max-width: 110px;
 }
 
-.tablon-eventos__tabla th {
-  background-color: var(--gris-ui);
-  font-weight: 700;
-  font-size: 1.13rem;
-}
-
-.tablon-eventos__celda-ocupada {
-  background-color: var(--gris-ui);
-  padding: 0 !important;
-  margin: 0 !important;
-  border: 1.5px solid var(--gris-texto);
+.tablon-eventos__celda-ocupada,
+.tablon-eventos__celda-libre {
   box-sizing: border-box;
-  height: 50px;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: var(--gris-ui);
 }
 
 .tarjeta-evento {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  
+  align-items: center;       
   width: 100%;
   height: 100%;
   background: var(--amarillo-dorado);
   color: var(--azul-medianoche);
-  border-radius: 0 !important;
-  box-shadow: none !important;
+  border-radius: 0;
+  box-shadow: none;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  line-height: 1.15;
   font-size: 0.93rem;
+  line-height: 1.15;
   overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 }
 
 .tarjeta-evento__id {
   font-weight: 600;
-  font-size: 0.85rem;
-  margin: 0;
+  font-size: 0.95rem;
+  margin: 0 0 0.16em 0;
 }
 
 .tarjeta-evento__titulo {
   font-family: 'Oswald', sans-serif;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.15rem;
   margin: 0;
-}
-
-.tarjeta-evento__detalle,
-.tarjeta-evento__organizador {
-  font-size: 0.82rem;
-  margin: 0;
-  font-weight: 400;
 }
 
 .tablon-eventos__celda-libre {
@@ -216,4 +216,3 @@ main {
   color: var(--azul-medianoche);
   cursor: default;
 }
-
