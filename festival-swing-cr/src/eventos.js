@@ -66,6 +66,12 @@ const mostrarTablonEventos = function () {
             <div class="tarjeta-evento__titulo">${evento.nombre}</div>
           `;
 
+          // Abrir modal al hacer click en la tarjeta
+          tarjeta.addEventListener("click", (e) => {
+            e.stopPropagation();
+            abrirModalEvento(evento);
+          });
+
           tarjeta.addEventListener("dragstart", (e) => {
             e.dataTransfer.setData("text/plain", String(evento.id));
             tarjeta.classList.add("tarjeta-evento--arrastrando");
@@ -101,8 +107,9 @@ const mostrarTablonEventos = function () {
             if (!eventoIdStr) return;
 
             const eventoId = Number(eventoIdStr);
-            const eventosActuales = JSON.parse(localStorage.getItem("eventos")) || [];
-            const evento = eventosActuales.find(ev => ev.id === eventoId);
+            const eventosActuales =
+              JSON.parse(localStorage.getItem("eventos")) || [];
+            const evento = eventosActuales.find((ev) => ev.id === eventoId);
             if (!evento) return;
 
             const nuevoDia = parseInt(celda.dataset.dia, 10);
@@ -193,6 +200,28 @@ const mostrarTablonEventos = function () {
       tbody.appendChild(fila);
     });
   });
+};
+
+const abrirModalEvento = function (evento) {
+  document.getElementById("modal-evento").style.display = "flex";
+  document.getElementById("modal-titulo").textContent = evento.nombre;
+  document.getElementById("modal-id").textContent = evento.id;
+  document.getElementById("modal-nombre").textContent = evento.nombre;
+  document.getElementById("modal-descripcion").textContent = evento.descripcion;
+  document.getElementById("modal-dia").textContent = evento.dia;
+  document.getElementById("modal-hora").textContent = evento.hora;
+  document.getElementById("modal-ubicacion").textContent = evento.ubicacion;
+  document.getElementById("modal-duracion").textContent = evento.duracion;
+};
+
+document.getElementById("cerrar-modal").onclick = () => {
+  document.getElementById("modal-evento").style.display = "none";
+};
+
+document.getElementById("modal-evento").onclick = (e) => {
+  if (e.target === e.currentTarget) {
+    e.target.style.display = "none";
+  }
 };
 
 document.addEventListener("DOMContentLoaded", mostrarTablonEventos);
