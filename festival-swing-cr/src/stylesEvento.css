@@ -222,6 +222,7 @@ main {
   border: 1.8px solid #23c234;
   transition: background-color 0.2s ease, border-color 0.2s ease;
 }
+
 .modal-evento {
   display: none;
   position: fixed;
@@ -277,4 +278,82 @@ main {
   font-family: 'Oswald', sans-serif;
   font-weight: 700;
   color: var(--rojo-ladrillo);
+}
+
+body {
+  overflow-x: hidden;
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 1em;
+  }
+
+  .navbar__logo {
+    margin-right: 0;
+    margin-bottom: 1em;
+  }
+
+  .navbar__menu {
+    gap: 1.5rem;
+    justify-content: center;
+  }
+
+  .tablon-eventos__titulo {
+    font-size: 2.2rem;
+    padding: 0 1rem;
+  }
+}
+
+.tablon-eventos__dia {
+  padding: 1.8rem 1rem;
+  width: calc(100vw - 2rem);
+}
+
+.tablon-eventos__tabla {
+  min-width: 100%;
+  width: auto;
+}
+
+@media (max-width: 768px) {
+  .tablon-eventos__dia {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tablon-eventos__tabla {
+    display: block;
+    width: max-content;
+  }
+
+  .tablon-eventos__tabla th,
+  .tablon-eventos__tabla td {
+    font-size: 0.95rem;
+    padding: 0.3rem 0.4rem;
+  }
+
+  .tarjeta-evento {
+    font-size: 0.85rem;
+  }
+
+  .tarjeta-evento__titulo {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .modal-evento__contenido {
+    padding: 18px;
+    margin: 1rem;
+  }
+
+  .modal-evento__contenido h2 {
+    font-size: 1.5rem;
+  }
+
+  .modal-evento__contenido p {
+    font-size: 1rem;
+  }
 }
