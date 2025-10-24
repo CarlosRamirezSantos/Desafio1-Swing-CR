@@ -222,6 +222,21 @@ document.getElementById("modal-evento").onclick = (e) => {
   if (e.target === e.currentTarget) {
     e.target.style.display = "none";
   }
+
+  document.getElementById("btn-borrar-evento").addEventListener("click", () => {
+  const eventoId = Number(document.getElementById("modal-id").textContent);
+  if (!eventoId) return;
+
+  let eventos = JSON.parse(localStorage.getItem("eventos")) || [];
+  eventos = eventos.filter(evento => evento.id !== eventoId);
+  localStorage.setItem("eventos", JSON.stringify(eventos));
+
+  // Cierra el modal
+  document.getElementById("modal-evento").style.display = "none";
+
+  mostrarTablonEventos();
+});
+
 };
 
 document.addEventListener("DOMContentLoaded", mostrarTablonEventos);
