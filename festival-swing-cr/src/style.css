@@ -1,7 +1,8 @@
-@import url('https://fonts.googleapis.com/css?family=Oswald:400,700|Montserrat:700|Inter:300,400&display=swap');
-@import url('./variables.css');
+@import url("https://fonts.googleapis.com/css?family=Oswald:400,700|Montserrat:700|Inter:300,400&display=swap");
+@import url("./variables.css");
 
-html, body {
+html,
+body {
   width: 100%;
   min-width: 0;
   overflow-x: hidden;
@@ -12,7 +13,7 @@ html, body {
 
 body {
   background-color: var(--crema-vintage);
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   color: var(--azul-medianoche);
   margin: 0;
   padding: 0;
@@ -27,7 +28,7 @@ body {
   align-items: center;
   justify-content: flex-start;
   padding: 1.2em 3vw 1.2em 3vw;
-  min-height: 90px; 
+  min-height: 90px;
   margin-bottom: 2.2rem;
 }
 
@@ -58,7 +59,7 @@ body {
 }
 
 .navbar__link {
-  font-family: 'Oswald', Arial, sans-serif;
+  font-family: "Oswald", Arial, sans-serif;
   font-size: 1.35rem;
   color: var(--amarillo-dorado);
   background: none;
@@ -87,7 +88,7 @@ main {
   background-color: var(--gris-ui);
   border-radius: 26px;
   padding: 3.7rem 2.1rem;
-  box-shadow: 0 4px 32px rgb(0 0 0 / .15);
+  box-shadow: 0 4px 32px rgb(0 0 0 / 0.15);
   max-width: 650px;
   width: 100%;
   margin: 38px auto;
@@ -97,7 +98,7 @@ main {
   box-sizing: border-box;
 }
 .form-evento h2 {
-  font-family: 'Montserrat', 'Oswald', Arial, sans-serif;
+  font-family: "Montserrat", "Oswald", Arial, sans-serif;
   font-weight: 700;
   font-size: 2.4rem;
   letter-spacing: 1.25px;
@@ -109,7 +110,7 @@ main {
   display: flex;
   justify-content: center;
   gap: 2.25rem;
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   color: var(--azul-medianoche);
   font-size: 1.13rem;
   margin-bottom: 0.6rem;
@@ -125,7 +126,7 @@ main {
 }
 .form-evento__grupo label,
 .form-fields label {
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   font-weight: 700;
   font-size: 1.08rem;
   color: var(--azul-medianoche);
@@ -143,7 +144,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   font-weight: 700;
   font-size: 1.08rem;
   color: var(--azul-medianoche);
@@ -151,7 +152,8 @@ main {
   max-width: 200px;
   width: auto;
 }
-.form-evento__grupo--inline label:not(:first-child):has(input[type="checkbox"]) {
+.form-evento__grupo--inline
+  label:not(:first-child):has(input[type="checkbox"]) {
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -179,10 +181,10 @@ textarea {
   border: 2px solid var(--gris-texto);
   border-radius: 10px;
   padding: 0.9em 1.15em;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 1.16rem;
   outline-offset: 2px;
-  transition: border-color 0.20s;
+  transition: border-color 0.2s;
   background: #fff;
   width: 100%;
   box-sizing: border-box;
@@ -195,7 +197,7 @@ textarea:focus {
 }
 textarea {
   resize: vertical;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 button[type="submit"] {
   background-color: var(--amarillo-dorado);
@@ -204,7 +206,7 @@ button[type="submit"] {
   box-shadow: 0 2px 12px rgb(179 57 81 / 0.19);
   color: #fff;
   cursor: pointer;
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   font-weight: 700;
   font-size: 1.32rem;
   letter-spacing: 1.13px;
@@ -223,3 +225,49 @@ button[type="submit"]:focus {
   margin-top: 10px;
   font-weight: bold;
 }
+
+input[type="text"],
+select,
+textarea {
+  font-size: 16px;
+  width: 100%;
+}
+  @media (max-width: 600px) {
+    .navbar {
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 1em;
+    }
+
+    .navbar__logo {
+      margin-right: 0;
+      margin-bottom: 1em;
+    }
+
+    .form-evento {
+      padding: 1.8rem 1.2rem;
+      margin: 1.5rem auto;
+    }
+
+    .form-evento h2 {
+      font-size: 1.7rem;
+    }
+
+    .form-evento__tipo {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.8rem;
+    }
+
+    .form-evento__grupo--inline {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.2rem;
+    }
+
+    .form-evento__grupo--inline label {
+      width: 100%;
+      min-width: auto;
+    }
+  }
+
