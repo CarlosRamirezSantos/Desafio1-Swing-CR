@@ -27,19 +27,19 @@ body {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 1.2em 3vw 1.2em 3vw;
-  min-height: 90px;
-  margin-bottom: 2.2rem;
+  padding: 0.8em 2vw;
+  min-height: 70px;
+  margin-bottom: 1.5rem;
 }
 
 .navbar__logo {
-  margin-right: 3rem;
+  margin-right: 2rem;
   display: flex;
   align-items: center;
 }
 
 .navbar__logo-img {
-  height: 48px;
+  height: 36px;
   width: auto;
   display: block;
 }
@@ -48,7 +48,7 @@ body {
   list-style: none;
   display: flex;
   flex-direction: row;
-  gap: 2.6rem;
+  gap: 1.8rem;
   margin: 0;
   padding: 0;
 }
@@ -60,7 +60,7 @@ body {
 
 .navbar__link {
   font-family: "Oswald", Arial, sans-serif;
-  font-size: 1.35rem;
+  font-size: 1.2rem;
   color: var(--amarillo-dorado);
   background: none;
   text-decoration: none;
@@ -83,62 +83,74 @@ main {
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
+  padding: 1rem 0;
 }
+
 .form-evento {
   background-color: var(--gris-ui);
-  border-radius: 26px;
-  padding: 3.7rem 2.1rem;
-  box-shadow: 0 4px 32px rgb(0 0 0 / 0.15);
-  max-width: 650px;
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 4px 20px rgb(0 0 0 / 0.1);
+  max-width: 900px;
   width: 100%;
-  margin: 38px auto;
+  margin: 1rem auto;
   display: flex;
   flex-direction: column;
-  gap: 1.8rem;
+  gap: 1rem;
   box-sizing: border-box;
 }
+
 .form-evento h2 {
   font-family: "Montserrat", "Oswald", Arial, sans-serif;
   font-weight: 700;
-  font-size: 2.4rem;
-  letter-spacing: 1.25px;
+  font-size: 2rem;
+  letter-spacing: 1px;
   text-align: center;
-  margin-bottom: 0.6em;
+  margin-bottom: 0.4em;
   color: var(--azul-medianoche);
 }
+
 .form-evento__tipo {
   display: flex;
   justify-content: center;
-  gap: 2.25rem;
+  gap: 1.5rem;
   font-family: "Oswald", sans-serif;
   color: var(--azul-medianoche);
-  font-size: 1.13rem;
-  margin-bottom: 0.6rem;
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
 }
+
 .form-evento__tipo label {
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
 }
+
 .form-evento__grupo,
 .form-fields {
   display: flex;
   flex-direction: column;
-  gap: 0.18rem;
+  gap: 0.1rem;
 }
+
 .form-evento__grupo label,
 .form-fields label {
   font-family: "Oswald", sans-serif;
   font-weight: 700;
-  font-size: 1.08rem;
+  font-size: 0.95rem;
   color: var(--azul-medianoche);
 }
+
 .form-evento__grupo--inline {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 2.8rem;
-  margin-bottom: 0.7em;
+  gap: 1.5rem;
+  margin-bottom: 0.5em;
 }
+
 .form-evento__grupo--inline label {
   margin: 0;
   display: flex;
@@ -146,75 +158,86 @@ main {
   align-items: center;
   font-family: "Oswald", sans-serif;
   font-weight: 700;
-  font-size: 1.08rem;
+  font-size: 0.95rem;
   color: var(--azul-medianoche);
-  min-width: 110px;
-  max-width: 200px;
+  min-width: 90px;
+  max-width: 160px;
   width: auto;
 }
+
 .form-evento__grupo--inline
   label:not(:first-child):has(input[type="checkbox"]) {
   flex-direction: row;
   justify-content: center;
   align-items: center;
   font-weight: 700;
-  font-size: 1.08rem;
-  min-width: 96px;
+  font-size: 0.95rem;
+  min-width: 80px;
 }
+
 .form-evento__grupo--inline input[type="number"],
 .form-evento__grupo--inline input[type="time"] {
-  min-width: 110px;
-  font-size: 1.08rem;
-  margin-top: 0.13em;
+  min-width: 90px;
+  font-size: 0.95rem;
+  margin-top: 0.1em;
   width: 100%;
   box-sizing: border-box;
 }
+
 .form-evento__grupo--inline input[type="checkbox"] {
-  margin-right: 0.4em;
-  transform: scale(1.22);
+  margin-right: 0.3em;
+  transform: scale(1.1);
 }
+
 input[type="text"],
 input[type="number"],
 input[type="time"],
 select,
 textarea {
   border: 2px solid var(--gris-texto);
-  border-radius: 10px;
-  padding: 0.9em 1.15em;
+  border-radius: 8px;
+  padding: 0.6em 0.8em;
   font-family: "Inter", sans-serif;
-  font-size: 1.16rem;
+  font-size: 1rem;
   outline-offset: 2px;
   transition: border-color 0.2s;
   background: #fff;
   width: 100%;
   box-sizing: border-box;
 }
+
 input:focus,
 select:focus,
 textarea:focus {
   border-color: var(--amarillo-dorado);
   box-shadow: 0 0 0 2px var(--amarillo-dorado);
 }
+
 textarea {
   resize: vertical;
   font-family: "Inter", sans-serif;
+  height: 80px;
+  padding: 0.6em 0.8em;
+  font-size: 1rem;
 }
+
 button[type="submit"] {
   background-color: var(--amarillo-dorado);
   border: none;
-  border-radius: 11px;
-  box-shadow: 0 2px 12px rgb(179 57 81 / 0.19);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgb(179 57 81 / 0.15);
   color: #fff;
   cursor: pointer;
   font-family: "Oswald", sans-serif;
   font-weight: 700;
-  font-size: 1.32rem;
-  letter-spacing: 1.13px;
-  padding: 0.95em 1em;
+  font-size: 1.1rem;
+  letter-spacing: 0.8px;
+  padding: 0.7em 0.9em;
   text-transform: uppercase;
   transition: background 0.19s;
-  margin-top: 1rem;
+  margin-top: 0.8rem;
 }
+
 button[type="submit"]:hover,
 button[type="submit"]:focus {
   background-color: var(--verde-oliva);
@@ -222,52 +245,62 @@ button[type="submit"]:focus {
 
 #mensajeEvento {
   color: rgb(7, 147, 7);
-  margin-top: 10px;
+  margin-top: 0.5rem;
   font-weight: bold;
+  font-size: 0.9rem;
 }
 
-input[type="text"],
-select,
-textarea {
-  font-size: 16px;
+.form-dos-columnas {
+  display: flex;
+  gap: 1.5rem;
   width: 100%;
 }
-  @media (max-width: 600px) {
-    .navbar {
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 1em;
-    }
 
-    .navbar__logo {
-      margin-right: 0;
-      margin-bottom: 1em;
-    }
+.form-columna {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 
-    .form-evento {
-      padding: 1.8rem 1.2rem;
-      margin: 1.5rem auto;
-    }
-
-    .form-evento h2 {
-      font-size: 1.7rem;
-    }
-
-    .form-evento__tipo {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.8rem;
-    }
-
-    .form-evento__grupo--inline {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1.2rem;
-    }
-
-    .form-evento__grupo--inline label {
-      width: 100%;
-      min-width: auto;
-    }
+@media (max-width: 600px) {
+  .navbar {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0.6em;
+    min-height: 60px;
   }
-
+  .navbar__logo {
+    margin-right: 0;
+    margin-bottom: 0.8em;
+  }
+  .form-evento {
+    padding: 1.2rem 1rem;
+    margin: 1rem auto;
+    max-width: 100%;
+  }
+  .form-evento h2 {
+    font-size: 1.5rem;
+  }
+  .form-evento__tipo {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+  .form-evento__grupo--inline {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+  .form-evento__grupo--inline label {
+    width: 100%;
+    min-width: auto;
+  }
+  .form-dos-columnas {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  textarea {
+    height: 60px;
+  }
+}
