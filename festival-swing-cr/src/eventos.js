@@ -62,8 +62,8 @@ const mostrarTablonEventos = function () {
           tarjeta.dataset.eventoId = evento.id;
 
           tarjeta.innerHTML = `
-            <div class="tarjeta-evento__id">ID: ${evento.id || "?"}</div>
             <div class="tarjeta-evento__titulo">${evento.nombre}</div>
+            <div class="tarjeta-evento__titulo">${evento.estilo}</div>
           `;
 
           // Abrir modal al hacer click en la tarjeta
@@ -93,7 +93,14 @@ const mostrarTablonEventos = function () {
           celda.addEventListener("dragover", (e) => {
             e.preventDefault();
             celda.classList.add("tablon-eventos__celda-libre--sobre");
-          });
+              const margin = 80; 
+              const scrollSpeed = 15;
+              if (e.clientY < margin) {
+                window.scrollBy(0, -scrollSpeed);
+              } else if (e.clientY > window.innerHeight - margin) {
+                window.scrollBy(0, scrollSpeed);
+              }
+            });
 
           celda.addEventListener("dragleave", () => {
             celda.classList.remove("tablon-eventos__celda-libre--sobre");
@@ -204,7 +211,6 @@ const mostrarTablonEventos = function () {
 
 const abrirModalEvento = function (evento) {
   document.getElementById("modal-evento").style.display = "flex";
-  document.getElementById("modal-titulo").textContent = evento.nombre;
   document.getElementById("modal-id").textContent = evento.id;
   document.getElementById("modal-nombre").textContent = evento.nombre;
   document.getElementById("modal-descripcion").textContent = evento.descripcion;
@@ -224,19 +230,18 @@ document.getElementById("modal-evento").onclick = (e) => {
   }
 
   document.getElementById("btn-borrar-evento").addEventListener("click", () => {
-  const eventoId = Number(document.getElementById("modal-id").textContent);
-  if (!eventoId) return;
+    const eventoId = Number(document.getElementById("modal-id").textContent);
+    if (!eventoId) return;
 
-  let eventos = JSON.parse(localStorage.getItem("eventos")) || [];
-  eventos = eventos.filter(evento => evento.id !== eventoId);
-  localStorage.setItem("eventos", JSON.stringify(eventos));
+    let eventos = JSON.parse(localStorage.getItem("eventos")) || [];
+    eventos = eventos.filter((evento) => evento.id !== eventoId);
+    localStorage.setItem("eventos", JSON.stringify(eventos));
 
-  // Cierra el modal
-  document.getElementById("modal-evento").style.display = "none";
+    // Cierra el modal
+    document.getElementById("modal-evento").style.display = "none";
 
-  mostrarTablonEventos();
-});
-
+    mostrarTablonEventos();
+  });
 };
 
 document.addEventListener("DOMContentLoaded", mostrarTablonEventos);
