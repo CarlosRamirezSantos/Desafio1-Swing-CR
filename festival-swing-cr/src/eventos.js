@@ -4,6 +4,22 @@ import {
   horasDisponibles,
 } from "./configEventos.js";
 
+const obtenerHorasPermitidasPorDia = function (dia) {
+  if (dia === 10) {
+    
+    return ["20:00", "21:00", "22:00", "23:00"];
+  } else if (dia === 12) {
+
+    return [
+      "10:00", "11:00", "12:00", "13:00", "14:00",
+      "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"
+    ];
+  } else {
+  
+    return horasDisponibles;
+  }
+};
+
 const mostrarTablonEventos = function () {
   const eventos = JSON.parse(localStorage.getItem("eventos")) || [];
 
@@ -14,12 +30,14 @@ const mostrarTablonEventos = function () {
     const tbody = tabla.querySelector("tbody");
     tbody.innerHTML = "";
 
+    const horasAMostrar = obtenerHorasPermitidasPorDia(diaObj.numero);
+
     const rowspanMap = {};
     ubicaciones.forEach((ubic) => {
       rowspanMap[ubic] = 0;
     });
 
-    horasDisponibles.forEach((hora) => {
+    horasAMostrar.forEach((hora) => {
       const fila = document.createElement("tr");
 
       const celdaHora = document.createElement("td");
@@ -66,7 +84,6 @@ const mostrarTablonEventos = function () {
             <div class="tarjeta-evento__titulo">${evento.estilo}</div>
           `;
 
-          // Abrir modal al hacer click en la tarjeta
           tarjeta.addEventListener("click", (e) => {
             e.stopPropagation();
             abrirModalEvento(evento);
@@ -93,14 +110,14 @@ const mostrarTablonEventos = function () {
           celda.addEventListener("dragover", (e) => {
             e.preventDefault();
             celda.classList.add("tablon-eventos__celda-libre--sobre");
-              const margin = 80; 
-              const scrollSpeed = 15;
-              if (e.clientY < margin) {
-                window.scrollBy(0, -scrollSpeed);
-              } else if (e.clientY > window.innerHeight - margin) {
-                window.scrollBy(0, scrollSpeed);
-              }
-            });
+            const margin = 80;
+            const scrollSpeed = 15;
+            if (e.clientY < margin) {
+              window.scrollBy(0, -scrollSpeed);
+            } else if (e.clientY > window.innerHeight - margin) {
+              window.scrollBy(0, scrollSpeed);
+            }
+          });
 
           celda.addEventListener("dragleave", () => {
             celda.classList.remove("tablon-eventos__celda-libre--sobre");
@@ -124,6 +141,11 @@ const mostrarTablonEventos = function () {
             const nuevaUbicacion = celda.dataset.ubicacion;
             const duracionOriginal = evento.duracion;
 
+            const horasPermitidasDestino = obtenerHorasPermitidasPorDia(nuevoDia);
+            if (!horasPermitidasDestino.includes(nuevaHora)) {
+              return; 
+            }
+
             let indiceInicio = -1;
             for (let i = 0; i < horasDisponibles.length; i++) {
               if (horasDisponibles[i] === nuevaHora) {
@@ -146,8 +168,13 @@ const mostrarTablonEventos = function () {
                 espacioSuficiente = false;
               } else {
                 const horaActual = horasDisponibles[indiceInicio + i];
-                let ocupada = false;
+              
+                if (!horasPermitidasDestino.includes(horaActual)) {
+                  espacioSuficiente = false;
+                  break;
+                }
 
+                let ocupada = false;
                 for (const ev of eventosActuales) {
                   if (ev.id === eventoId) continue;
 
@@ -183,7 +210,7 @@ const mostrarTablonEventos = function () {
                 if (ocupada) {
                   espacioSuficiente = false;
                 } else {
-                  celdasLibres = celdasLibres + 1;
+                  celdasLibres++;
                 }
               }
             }
@@ -213,11 +240,16 @@ const abrirModalEvento = function (evento) {
   document.getElementById("modal-evento").style.display = "flex";
   document.getElementById("modal-id").textContent = evento.id;
   document.getElementById("modal-nombre").textContent = evento.nombre;
-  document.getElementById("modal-descripcion").textContent = evento.descripcion;
+  document.getElementById("modal-descripcion").textContent =
+    evento.descripcion || "—";
   document.getElementById("modal-dia").textContent = evento.dia;
   document.getElementById("modal-hora").textContent = evento.hora;
   document.getElementById("modal-ubicacion").textContent = evento.ubicacion;
   document.getElementById("modal-duracion").textContent = evento.duracion;
+  document.getElementById("modal-estilo").textContent = evento.estilo;
+  document.getElementById("modal-profesor").textContent = evento.profesor
+    ? "Sí"
+    : "No";
 };
 
 document.getElementById("cerrar-modal").onclick = () => {
@@ -228,21 +260,19 @@ document.getElementById("modal-evento").onclick = (e) => {
   if (e.target === e.currentTarget) {
     e.target.style.display = "none";
   }
-
-  document.getElementById("btn-borrar-evento").addEventListener("click", () => {
-    const eventoId = Number(document.getElementById("modal-id").textContent);
-    if (!eventoId) return;
-
-    let eventos = JSON.parse(localStorage.getItem("eventos")) || [];
-    eventos = eventos.filter((evento) => evento.id !== eventoId);
-    localStorage.setItem("eventos", JSON.stringify(eventos));
-
-    // Cierra el modal
-    document.getElementById("modal-evento").style.display = "none";
-
-    mostrarTablonEventos();
-  });
 };
+
+document.getElementById("btn-borrar-evento").addEventListener("click", () => {
+  const eventoId = Number(document.getElementById("modal-id").textContent);
+  if (!eventoId) return;
+
+  let eventos = JSON.parse(localStorage.getItem("eventos")) || [];
+  eventos = eventos.filter((evento) => evento.id !== eventoId);
+  localStorage.setItem("eventos", JSON.stringify(eventos));
+
+  document.getElementById("modal-evento").style.display = "none";
+  mostrarTablonEventos();
+});
 
 document.addEventListener("DOMContentLoaded", mostrarTablonEventos);
 window.addEventListener("storage", mostrarTablonEventos);
