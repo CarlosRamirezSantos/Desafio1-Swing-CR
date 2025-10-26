@@ -26,48 +26,60 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let ubicacionSeleccionadaPorUsuario = null;
 
-  const setDisabledField = function (grupo, disabled) {
-    if (!grupo) return;
-    const inputs = grupo.querySelectorAll("input, select, textarea");
-    inputs.forEach((input) => {
-      input.disabled = disabled;
-    });
-  };
+const actualizarCampos = function () {
+  if (radioClase.checked) {
 
-  const actualizarCampos = function () {
-    if (radioClase.checked) {
-      setDisabledField(grupoNivel, false);
-      setDisabledField(grupoTipoActividad, true);
-      setDisabledField(grupoBanda, true);
-      descripcion.disabled = true;
-      profesorCheckbox.disabled = false;
-      duracionInput.disabled = false;
-    } else if (radioActividad.checked) {
-      setDisabledField(grupoNivel, true);
-      setDisabledField(grupoTipoActividad, false);
-      setDisabledField(grupoBanda, false);
-      descripcion.disabled = false;
-      profesorCheckbox.disabled = false;
-      duracionInput.disabled = false;
-    }
-  };
+    descripcion.value = "";
+    tipoActividadSelect.value = "";
+    bandaCheckbox.checked = false;
+
+    grupoNivel.style.display = "";
+    nivelSelect.selectedIndex = 0;
+
+    grupoTipoActividad.style.display = "none";
+    descripcion.style.display = "none";
+
+    const labelDescripcion = document.querySelector('label[for="descripcion"]');
+    if (labelDescripcion) labelDescripcion.style.display = "none";
+
+    grupoBanda.style.display = "";
+
+    const labelBanda = bandaCheckbox.closest('label');
+    if (labelBanda) labelBanda.style.display = "none";
+
+  } else if (radioActividad.checked) {
+
+    nivelSelect.value = "";
+
+    grupoNivel.style.display = "none";
 
 
+    grupoTipoActividad.style.display = "";
+    descripcion.style.display = "";
+    grupoBanda.style.display = "";
+
+    const labelDescripcion = document.querySelector('label[for="descripcion"]');
+    if (labelDescripcion) labelDescripcion.style.display = "";
+
+
+    const labelBanda = bandaCheckbox.closest('label');
+    if (labelBanda) labelBanda.style.display = "";
+  
+      tipoActividadSelect.selectedIndex = 0;
+  }
+};
   const obtenerHorasConSalasLibresPorDia = function (dia) {
     const eventos = JSON.parse(localStorage.getItem("eventos")) || [];
 
     let rangoPermitido = [];
     if (dia === 10) {
-
       rangoPermitido = ["20:00", "21:00", "22:00", "23:00"];
     } else if (dia === 12) {
-
       rangoPermitido = [
         "10:00", "11:00", "12:00", "13:00", "14:00",
         "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"
       ];
     } else {
-
       rangoPermitido = horasDisponibles;
     }
 
@@ -303,10 +315,9 @@ document.addEventListener("DOMContentLoaded", function () {
   radioActividad.addEventListener("change", actualizarCampos);
 
   diaSelect.addEventListener("change", () => {
-
-  horaSelect.value = ""; 
-  actualizarSelectHora();
-});
+    horaSelect.value = "";
+    actualizarSelectHora();
+  });
 
   horaSelect.addEventListener("change", () => {
     actualizarSelectUbicacion();

@@ -246,6 +246,10 @@ const abrirModalEvento = function (evento) {
   document.getElementById("modal-hora").textContent = evento.hora;
   document.getElementById("modal-ubicacion").textContent = evento.ubicacion;
   document.getElementById("modal-duracion").textContent = evento.duracion;
+  document.getElementById("modal-estilo").textContent = evento.estilo;
+  document.getElementById("modal-profesor").textContent = evento.profesor
+    ? "Sí"
+    : "No";
 };
 
 document.getElementById("cerrar-modal").onclick = () => {
