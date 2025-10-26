@@ -1,8 +1,10 @@
 import { Clase } from "./models/Clase.js";
 import { Actividad } from "./models/Actividad.js";
-import { ubicaciones, diasConNombre, horasDisponibles } from "./configEventos.js";
-
-// localStorage.clear();
+import {
+  ubicaciones,
+  diasConNombre,
+  horasDisponibles,
+} from "./configEventos.js";
 
 document.addEventListener("DOMContentLoaded", function () {
   const radioClase = document.getElementById("radioClase");
@@ -26,48 +28,45 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let ubicacionSeleccionadaPorUsuario = null;
 
-const actualizarCampos = function () {
-  if (radioClase.checked) {
+  const actualizarCampos = function () {
+    if (radioClase.checked) {
+      descripcion.value = "";
+      tipoActividadSelect.value = "";
+      bandaCheckbox.checked = false;
 
-    descripcion.value = "";
-    tipoActividadSelect.value = "";
-    bandaCheckbox.checked = false;
+      grupoNivel.style.display = "";
+      nivelSelect.selectedIndex = 0;
 
-    grupoNivel.style.display = "";
-    nivelSelect.selectedIndex = 0;
+      grupoTipoActividad.style.display = "none";
+      descripcion.style.display = "none";
 
-    grupoTipoActividad.style.display = "none";
-    descripcion.style.display = "none";
+      const labelDescripcion = document.querySelector(
+        'label[for="descripcion"]'
+      );
+      if (labelDescripcion) labelDescripcion.style.display = "none";
 
-    const labelDescripcion = document.querySelector('label[for="descripcion"]');
-    if (labelDescripcion) labelDescripcion.style.display = "none";
+      grupoBanda.style.display = "";
+      const labelBanda = bandaCheckbox.closest("label");
+      if (labelBanda) labelBanda.style.display = "none";
+    } else if (radioActividad.checked) {
+      nivelSelect.value = "";
+      grupoNivel.style.display = "none";
+      grupoTipoActividad.style.display = "";
+      descripcion.style.display = "";
+      grupoBanda.style.display = "";
 
-    grupoBanda.style.display = "";
+      const labelDescripcion = document.querySelector(
+        'label[for="descripcion"]'
+      );
+      if (labelDescripcion) labelDescripcion.style.display = "";
 
-    const labelBanda = bandaCheckbox.closest('label');
-    if (labelBanda) labelBanda.style.display = "none";
+      const labelBanda = bandaCheckbox.closest("label");
+      if (labelBanda) labelBanda.style.display = "";
 
-  } else if (radioActividad.checked) {
-
-    nivelSelect.value = "";
-
-    grupoNivel.style.display = "none";
-
-
-    grupoTipoActividad.style.display = "";
-    descripcion.style.display = "";
-    grupoBanda.style.display = "";
-
-    const labelDescripcion = document.querySelector('label[for="descripcion"]');
-    if (labelDescripcion) labelDescripcion.style.display = "";
-
-
-    const labelBanda = bandaCheckbox.closest('label');
-    if (labelBanda) labelBanda.style.display = "";
-  
       tipoActividadSelect.selectedIndex = 0;
-  }
-};
+    }
+  };
+
   const obtenerHorasConSalasLibresPorDia = function (dia) {
     const eventos = JSON.parse(localStorage.getItem("eventos")) || [];
 
@@ -76,8 +75,17 @@ const actualizarCampos = function () {
       rangoPermitido = ["20:00", "21:00", "22:00", "23:00"];
     } else if (dia === 12) {
       rangoPermitido = [
-        "10:00", "11:00", "12:00", "13:00", "14:00",
-        "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"
+        "10:00",
+        "11:00",
+        "12:00",
+        "13:00",
+        "14:00",
+        "15:00",
+        "16:00",
+        "17:00",
+        "18:00",
+        "19:00",
+        "20:00",
       ];
     } else {
       rangoPermitido = horasDisponibles;
@@ -85,28 +93,36 @@ const actualizarCampos = function () {
 
     const horasFiltradas = [];
     for (let hora of rangoPermitido) {
-      if (!horasDisponibles.includes(hora)) continue;
+      if (horasDisponibles.includes(hora)) {
+        let ubicacionesOcupadas = [];
+        for (let evento of eventos) {
+          if (evento.dia === dia) {
+            let indiceEvento = horasDisponibles.indexOf(evento.hora);
+            let siguienteHora;
+            if (
+              indiceEvento >= 0 &&
+              indiceEvento < horasDisponibles.length - 1
+            ) {
+              siguienteHora = horasDisponibles[indiceEvento + 1];
+            } else {
+              siguienteHora = null;
+            }
 
-      let ubicacionesOcupadas = [];
-      for (let evento of eventos) {
-        if (evento.dia === dia) {
-          let indiceEvento = horasDisponibles.indexOf(evento.hora);
-          let siguienteHora = indiceEvento >= 0 && indiceEvento < horasDisponibles.length - 1
-            ? horasDisponibles[indiceEvento + 1]
-            : null;
-
-          if (evento.hora === hora) {
-            ubicacionesOcupadas.push(evento.ubicacion);
-          }
-          if (evento.duracion === 120 && siguienteHora === hora) {
-            ubicacionesOcupadas.push(evento.ubicacion);
+            if (evento.hora === hora) {
+              ubicacionesOcupadas.push(evento.ubicacion);
+            }
+            if (evento.duracion === 120 && siguienteHora === hora) {
+              ubicacionesOcupadas.push(evento.ubicacion);
+            }
           }
         }
-      }
 
-      let ubicacionesLibres = ubicaciones.filter(ubic => !ubicacionesOcupadas.includes(ubic));
-      if (ubicacionesLibres.length > 0) {
-        horasFiltradas.push(hora);
+        let ubicacionesLibres = ubicaciones.filter(
+          (ubic) => !ubicacionesOcupadas.includes(ubic)
+        );
+        if (ubicacionesLibres.length > 0) {
+          horasFiltradas.push(hora);
+        }
       }
     }
 
@@ -115,7 +131,7 @@ const actualizarCampos = function () {
 
   const obtenerDiasConHorasLibres = function () {
     const diasFiltrados = [];
-    const numerosDias = diasConNombre.map(d => d.numero);
+    const numerosDias = diasConNombre.map((d) => d.numero);
     for (let dia of numerosDias) {
       const horasLibres = obtenerHorasConSalasLibresPorDia(dia);
       if (horasLibres.length > 0) {
@@ -130,10 +146,11 @@ const actualizarCampos = function () {
     const diasLibres = obtenerDiasConHorasLibres();
 
     diaSelect.innerHTML = "";
+    diaSelect.disabled = false;
 
     diasConNombre
-      .filter(dia => diasLibres.includes(dia.numero))
-      .forEach(dia => {
+      .filter((dia) => diasLibres.includes(dia.numero))
+      .forEach((dia) => {
         let option = document.createElement("option");
         option.value = dia.numero;
         option.textContent = dia.nombre;
@@ -141,15 +158,14 @@ const actualizarCampos = function () {
       });
 
     if (diaSelect.children.length === 0) {
-      let option = document.createElement("option");
-      option.value = "";
-      option.textContent = "No hay días disponibles";
-      diaSelect.appendChild(option);
+      diaSelect.disabled = true;
     } else if (diasLibres.includes(Number(valorPrevio))) {
       diaSelect.value = valorPrevio;
     } else {
       diaSelect.selectedIndex = 0;
     }
+
+    actualizarSelectHora();
   };
 
   const obtenerHorasConSalasLibres = function () {
@@ -157,28 +173,27 @@ const actualizarCampos = function () {
     if (!diaSeleccionado || isNaN(diaSeleccionado)) return [];
     return obtenerHorasConSalasLibresPorDia(diaSeleccionado);
   };
-
   const actualizarSelectHora = function () {
-    const valorPrevio = horaSelect.value;
     const horasLibres = obtenerHorasConSalasLibres();
+
     horaSelect.innerHTML = "";
-    for (let hora of horasLibres) {
-      let option = document.createElement("option");
-      option.value = hora;
-      option.textContent = hora;
-      horaSelect.appendChild(option);
-    }
+    horaSelect.disabled = false;
+
     if (horasLibres.length === 0) {
-      let option = document.createElement("option");
-      option.value = "";
-      option.textContent = "No hay horas disponibles";
-      horaSelect.appendChild(option);
-    }
-    if (horasLibres.includes(valorPrevio)) {
-      horaSelect.value = valorPrevio;
+      horaSelect.disabled = true;
     } else {
-      horaSelect.selectedIndex = 0;
+      for (let i = 0; i < horasLibres.length; i++) {
+        let hora = horasLibres[i];
+        let option = document.createElement("option");
+        option.value = hora;
+        option.textContent = hora;
+        if (i === 0) {
+          option.selected = true;
+        }
+        horaSelect.appendChild(option);
+      }
     }
+
     actualizarSelectUbicacion();
     actualizarSelectDuracion();
   };
@@ -188,8 +203,11 @@ const actualizarCampos = function () {
     const dia = parseInt(diaSelect.value, 10);
     const hora = horaSelect.value;
 
-    if (!dia || !hora || hora === "No hay horas disponibles") {
-      ubicacionSelect.innerHTML = '<option value="">Selecciona día y hora</option>';
+    ubicacionSelect.innerHTML = "";
+    ubicacionSelect.disabled = false;
+
+    if (!dia || !hora) {
+      ubicacionSelect.disabled = true;
       return;
     }
 
@@ -197,41 +215,48 @@ const actualizarCampos = function () {
     for (let evento of eventos) {
       if (evento.dia === dia) {
         let indiceEventoHora = horasDisponibles.indexOf(evento.hora);
+        let siguienteHora;
+        if (
+          indiceEventoHora >= 0 &&
+          indiceEventoHora < horasDisponibles.length - 1
+        ) {
+          siguienteHora = horasDisponibles[indiceEventoHora + 1];
+        } else {
+          siguienteHora = null;
+        }
+
         if (evento.hora === hora) {
           ubicacionesOcupadas.push(evento.ubicacion);
         }
         if (
           evento.duracion === 120 &&
-          indiceEventoHora >= 0 &&
-          indiceEventoHora < horasDisponibles.length - 1
+          siguienteHora !== null &&
+          (siguienteHora === hora || evento.hora === hora)
         ) {
-          let siguienteHora = horasDisponibles[indiceEventoHora + 1];
-          if (siguienteHora === hora || evento.hora === hora) {
-            ubicacionesOcupadas.push(evento.ubicacion);
-          }
+          ubicacionesOcupadas.push(evento.ubicacion);
         }
       }
     }
 
-    const ubicacionesLibres = ubicaciones.filter(ubic => !ubicacionesOcupadas.includes(ubic));
-
-    ubicacionSelect.innerHTML = "";
+    const ubicacionesLibres = ubicaciones.filter(
+      (ubic) => !ubicacionesOcupadas.includes(ubic)
+    );
 
     if (ubicacionesLibres.length === 0) {
-      let option = document.createElement("option");
-      option.value = "";
-      option.textContent = "No hay salas libres";
-      ubicacionSelect.appendChild(option);
+      ubicacionSelect.disabled = true;
     } else {
-      ubicacionesLibres.forEach(ubic => {
+      ubicacionesLibres.forEach((ubic) => {
         let option = document.createElement("option");
         option.value = ubic;
         option.textContent = ubic;
         ubicacionSelect.appendChild(option);
       });
 
-      let seleccion = null;
-      if (ubicacionSeleccionadaPorUsuario !== null && ubicacionesLibres.includes(ubicacionSeleccionadaPorUsuario)) {
+      let seleccion;
+      if (
+        ubicacionSeleccionadaPorUsuario !== null &&
+        ubicacionesLibres.includes(ubicacionSeleccionadaPorUsuario)
+      ) {
         seleccion = ubicacionSeleccionadaPorUsuario;
       } else {
         seleccion = ubicacionesLibres[0];
@@ -248,23 +273,11 @@ const actualizarCampos = function () {
     const ubicacionSeleccionada = ubicacionSelect.value;
     const eventos = JSON.parse(localStorage.getItem("eventos")) || [];
 
-    if (
-      !horaSeleccionada ||
-      horaSeleccionada === "No hay horas disponibles" ||
-      !ubicacionSeleccionada ||
-      ubicacionSeleccionada === "" ||
-      ubicacionSeleccionada === "No hay salas libres"
-    ) {
-      const horasConDuracionRestringida = ["14:00", "23:00"];
-      duracionInput.innerHTML = "";
-      if (horasConDuracionRestringida.includes(horaSeleccionada)) {
-        duracionInput.innerHTML = '<option value="60">60</option>';
-      } else {
-        duracionInput.innerHTML = `
-          <option value="60">60</option>
-          <option value="120">120</option>
-        `;
-      }
+    duracionInput.innerHTML = "";
+    duracionInput.disabled = false;
+
+    if (!horaSeleccionada || !ubicacionSeleccionada) {
+      duracionInput.disabled = true;
       return;
     }
 
@@ -292,37 +305,21 @@ const actualizarCampos = function () {
       }
     }
 
-    duracionInput.innerHTML = "";
     if (esUltimaHora || hayEventoEnSiguienteHoraEnMismaSala) {
-      const option = document.createElement("option");
-      option.value = "60";
-      option.textContent = "60";
-      duracionInput.appendChild(option);
+      duracionInput.innerHTML = '<option value="60">60</option>';
     } else {
-      const option60 = document.createElement("option");
-      option60.value = "60";
-      option60.textContent = "60";
-      duracionInput.appendChild(option60);
-
-      const option120 = document.createElement("option");
-      option120.value = "120";
-      option120.textContent = "120";
-      duracionInput.appendChild(option120);
+      duracionInput.innerHTML = `
+        <option value="60">60</option>
+        <option value="120">120</option>
+      `;
     }
   };
 
   radioClase.addEventListener("change", actualizarCampos);
   radioActividad.addEventListener("change", actualizarCampos);
 
-  diaSelect.addEventListener("change", () => {
-    horaSelect.value = "";
-    actualizarSelectHora();
-  });
-
-  horaSelect.addEventListener("change", () => {
-    actualizarSelectUbicacion();
-  });
-
+  diaSelect.addEventListener("change", actualizarSelectHora);
+  horaSelect.addEventListener("change", actualizarSelectUbicacion);
   ubicacionSelect.addEventListener("change", function () {
     ubicacionSeleccionadaPorUsuario = this.value;
     actualizarSelectDuracion();
@@ -330,17 +327,19 @@ const actualizarCampos = function () {
 
   actualizarSelectDia();
   actualizarCampos();
-  actualizarSelectHora();
 
   formEvento.addEventListener("submit", function (e) {
     e.preventDefault();
 
     if (
+      !diaSelect.value ||
+      !horaSelect.value ||
       !ubicacionSelect.value ||
-      ubicacionSelect.value === "No hay salas libres" ||
-      ubicacionSelect.value === ""
+      !duracionInput.value ||
+      !estiloSelect.value ||
+      !document.getElementById("nombre").value.trim()
     ) {
-      mensajeEvento.textContent = "Selecciona una ubicación válida";
+      mensajeEvento.textContent = "Completa todos los campos obligatorios";
       mensajeEvento.style.color = "red";
       setTimeout(() => (mensajeEvento.textContent = ""), 3000);
       return;
@@ -359,11 +358,20 @@ const actualizarCampos = function () {
 
     let evento;
     if (radioClase.checked) {
-      evento = new Clase({
-        ...datosComunes,
-        nivel: nivelSelect.value,
-      });
+      if (!nivelSelect.value) {
+        mensajeEvento.textContent = "Selecciona un nivel";
+        mensajeEvento.style.color = "red";
+        setTimeout(() => (mensajeEvento.textContent = ""), 3000);
+        return;
+      }
+      evento = new Clase({ ...datosComunes, nivel: nivelSelect.value });
     } else {
+      if (!tipoActividadSelect.value || !descripcion.value.trim()) {
+        mensajeEvento.textContent = "Completa tipo y descripción";
+        mensajeEvento.style.color = "red";
+        setTimeout(() => (mensajeEvento.textContent = ""), 3000);
+        return;
+      }
       evento = new Actividad({
         ...datosComunes,
         tipo: tipoActividadSelect.value,
@@ -385,6 +393,5 @@ const actualizarCampos = function () {
     formEvento.reset();
     actualizarCampos();
     actualizarSelectDia();
-    actualizarSelectHora();
   });
 });
