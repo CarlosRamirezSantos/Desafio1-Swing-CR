@@ -261,14 +261,6 @@ main {
   color: var(--rojo-ladrillo); 
 }
 
-.modal-evento__contenido h2 {
-  font-family: 'Oswald', sans-serif;
-  font-weight: 700;
-  font-size: 1.8rem;
-  margin: 0 0 16px 0;
-  text-align: center;
-}
-
 .modal-evento__contenido p {
   margin: 8px 0;
   font-size: 1.1rem;

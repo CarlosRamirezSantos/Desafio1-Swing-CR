@@ -62,8 +62,8 @@ const mostrarTablonEventos = function () {
           tarjeta.dataset.eventoId = evento.id;
 
           tarjeta.innerHTML = `
-            <div class="tarjeta-evento__id">ID: ${evento.id || "?"}</div>
             <div class="tarjeta-evento__titulo">${evento.nombre}</div>
+            <div class="tarjeta-evento__titulo">${evento.estilo}</div>
           `;
 
           // Abrir modal al hacer click en la tarjeta
@@ -204,7 +204,6 @@ const mostrarTablonEventos = function () {
 
 const abrirModalEvento = function (evento) {
   document.getElementById("modal-evento").style.display = "flex";
-  document.getElementById("modal-titulo").textContent = evento.nombre;
   document.getElementById("modal-id").textContent = evento.id;
   document.getElementById("modal-nombre").textContent = evento.nombre;
   document.getElementById("modal-descripcion").textContent = evento.descripcion;
