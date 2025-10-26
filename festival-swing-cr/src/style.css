@@ -263,6 +263,27 @@ button[type="submit"]:focus {
   gap: 1rem;
 }
 
+.footer {
+  width: 100%;
+  background: var(--azul-medianoche);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+  margin-top: 1rem;
+  border-top: 2px solid var(--gris-ui);
+}
+
+.footer__redes {
+  display: flex;
+  gap: 5rem;
+}
+
+.footer__icono {
+  width: 40px;
+  height: 40px;
+}
+
 @media (max-width: 600px) {
   .navbar {
     flex-wrap: wrap;
@@ -302,5 +323,12 @@ button[type="submit"]:focus {
   }
   textarea {
     height: 60px;
+  }
+  .footer__redes {
+    gap: 2rem;
+  }
+  .footer__icono {
+    width: 30px;
+    height: 30px;
   }
 }

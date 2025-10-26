@@ -333,6 +333,14 @@ body {
   .tarjeta-evento__titulo {
     font-size: 1rem;
   }
+
+  .footer__redes {
+    gap: 2rem;
+  }
+  .footer__icono {
+    width: 30px;
+    height: 30px;
+  }
 }
 
 @media (max-width: 600px) {
@@ -371,4 +379,25 @@ body {
 #btn-borrar-evento:focus {
   background-color: #c0392b;
   outline: none;
+}
+
+.footer {
+  width: 100%;
+  background: var(--azul-medianoche);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+  margin-top: 1rem;
+  border-top: 2px solid var(--gris-ui);
+}
+
+.footer__redes {
+  display: flex;
+  gap: 5rem;
+}
+
+.footer__icono {
+  width: 40px;
+  height: 40px;
 }
