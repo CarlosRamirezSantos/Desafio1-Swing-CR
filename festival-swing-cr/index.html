@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <title>Registro de evento</title>
     <link rel="icon" type="image/png" href="assets/imagenes/Logo.png" />
-    <link rel="stylesheet" href="src/variables.css" />
-    <link rel="stylesheet" href="src/style.css" />
+    <link rel="stylesheet" href="assets/css/variables.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
   </head>
   <body>
     <nav class="navbar">
@@ -18,9 +18,9 @@
       </div>
       <ul class="navbar__menu">
         <li>
-          <a href="formulario.html" class="navbar__link navbar__link">Inicio</a>
+          <a href="index.html" class="navbar__link navbar__link">Inicio</a>
         </li>
-        <li><a href="eventos.html" class="navbar__link">Eventos</a></li>
+        <li><a href="assets/html/eventos.html" class="navbar__link">Eventos</a></li>
       </ul>
     </nav>
     <form class="form-evento">
@@ -54,15 +54,11 @@
           <div class="form-evento__grupo form-evento__grupo--inline">
             <label for="dia"
               >Día
-              <select id="dia" name="dia">
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-              </select>
+              <select id="dia" name="dia" required></select>
             </label>
             <label for="hora"
               >Hora
-              <select id="hora" name="hora"></select>
+              <select id="hora" name="hora" required></select>
             </label>
           </div>
 
@@ -86,18 +82,14 @@
           <div class="form-evento__grupo">
             <label for="ubicacion"
               >Ubicaciones disponibles
-              <select id="ubicacion" name="ubicacion"></select>
+              <select id="ubicacion" name="ubicacion" required></select>
             </label>
           </div>
 
           <div class="form-evento__grupo">
             <label for="estilo"
               >Estilo
-              <select id="estilo" name="estilo">
-                <option value="Lindy Hop">Lindy Hop</option>
-                <option value="Shag">Shag</option>
-                <option value="Solo Jazz">Solo Jazz</option>
-              </select>
+              <select id="estilo" name="estilo" required></select>
             </label>
           </div>
         </div>
@@ -107,23 +99,14 @@
           <div class="form-evento__grupo" id="grupo-nivel">
             <label for="nivel"
               >Nivel
-              <select id="nivel" name="nivel">
-                <option value="Básico">Básico</option>
-                <option value="Intermedio">Intermedio</option>
-                <option value="Avanzado">Avanzado</option>
-              </select>
+              <select id="nivel" name="nivel" required></select>
             </label>
           </div>
 
           <div class="form-evento__grupo" id="grupo-tipoActividad">
             <label for="tipoActividad"
               >Tipo de actividad
-              <select id="tipoActividad" name="tipoActividad">
-                <option value="Taster">Taster</option>
-                <option value="Social">Social</option>
-                <option value="Concierto">Concierto</option>
-                <option value="Mix & Match">Mix & Match</option>
-              </select>
+              <select id="tipoActividad" name="tipoActividad" required></select>
             </label>
           </div>
 
@@ -133,10 +116,7 @@
           >
             <label for="duracion"
               >Duración (minutos)
-              <select id="duracion" name="duracion">
-                <option value="60">60</option>
-                <option value="120">120</option>
-              </select>
+              <select id="duracion" name="duracion" required></select>
             </label>
             <label for="check_p">
               <input type="checkbox" id="check_p" /> Profesor
@@ -186,6 +166,6 @@
         </a>
       </div>
     </footer>
-    <script type="module" src="src/formulario.js"></script>
+    <script type="module" src="src/js/formulario.js"></script>
   </body>
 </html>
