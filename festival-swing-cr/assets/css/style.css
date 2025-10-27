@@ -1,0 +1,334 @@
+@import url("https://fonts.googleapis.com/css?family=Oswald:400,700|Montserrat:700|Inter:300,400&display=swap");
+@import url("./variables.css");
+
+html,
+body {
+  width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--crema-vintage);
+  font-family: "Inter", sans-serif;
+  color: var(--azul-medianoche);
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  width: 100%;
+  background: var(--azul-medianoche);
+  border-bottom: 2.5px solid var(--gris-ui);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0.8em 2vw;
+  min-height: 70px;
+  margin-bottom: 1.5rem;
+}
+
+.navbar__logo {
+  margin-right: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.navbar__logo-img {
+  height: 36px;
+  width: auto;
+  display: block;
+}
+
+.navbar__menu {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  gap: 1.8rem;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar__menu li {
+  display: flex;
+  align-items: center;
+}
+
+.navbar__link {
+  font-family: "Oswald", Arial, sans-serif;
+  font-size: 1.2rem;
+  color: var(--amarillo-dorado);
+  background: none;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition: border-bottom 0.18s, color 0.18s;
+  padding-bottom: 0.09em;
+  border-bottom: 2.5px solid transparent;
+}
+
+.navbar__link:hover,
+.navbar__link--activo {
+  color: var(--amarillo-dorado);
+  border-bottom: 2.5px solid var(--amarillo-dorado);
+}
+
+main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 1rem 0;
+}
+
+.form-evento {
+  background-color: var(--gris-ui);
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 4px 20px rgb(0 0 0 / 0.1);
+  max-width: 900px;
+  width: 100%;
+  margin: 1rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-sizing: border-box;
+}
+
+.form-evento h2 {
+  font-family: "Montserrat", "Oswald", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-bottom: 0.4em;
+  color: var(--azul-medianoche);
+}
+
+.form-evento__tipo {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  font-family: "Oswald", sans-serif;
+  color: var(--azul-medianoche);
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+}
+
+.form-evento__tipo label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+}
+
+.form-evento__grupo,
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.form-evento__grupo label,
+.form-fields label {
+  font-family: "Oswald", sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--azul-medianoche);
+}
+
+.form-evento__grupo--inline {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 0.5em;
+}
+
+.form-evento__grupo--inline label {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Oswald", sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--azul-medianoche);
+  min-width: 90px;
+  max-width: 160px;
+  width: auto;
+}
+
+.form-evento__grupo--inline
+  label:not(:first-child):has(input[type="checkbox"]) {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  min-width: 80px;
+}
+
+.form-evento__grupo--inline input[type="number"],
+.form-evento__grupo--inline input[type="time"] {
+  min-width: 90px;
+  font-size: 0.95rem;
+  margin-top: 0.1em;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-evento__grupo--inline input[type="checkbox"] {
+  margin-right: 0.3em;
+  transform: scale(1.1);
+}
+
+input[type="text"],
+input[type="number"],
+input[type="time"],
+select,
+textarea {
+  border: 2px solid var(--gris-texto);
+  border-radius: 8px;
+  padding: 0.6em 0.8em;
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  outline-offset: 2px;
+  transition: border-color 0.2s;
+  background: #fff;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--amarillo-dorado);
+  box-shadow: 0 0 0 2px var(--amarillo-dorado);
+}
+
+textarea {
+  resize: vertical;
+  font-family: "Inter", sans-serif;
+  height: 80px;
+  padding: 0.6em 0.8em;
+  font-size: 1rem;
+}
+
+button[type="submit"] {
+  background-color: var(--amarillo-dorado);
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgb(179 57 81 / 0.15);
+  color: #fff;
+  cursor: pointer;
+  font-family: "Oswald", sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.8px;
+  padding: 0.7em 0.9em;
+  text-transform: uppercase;
+  transition: background 0.19s;
+  margin-top: 0.8rem;
+}
+
+button[type="submit"]:hover,
+button[type="submit"]:focus {
+  background-color: var(--verde-oliva);
+}
+
+#mensajeEvento {
+  color: rgb(7, 147, 7);
+  margin-top: 0.5rem;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.form-dos-columnas {
+  display: flex;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.form-columna {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.footer {
+  width: 100%;
+  background: var(--azul-medianoche);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+  margin-top: 1rem;
+  border-top: 2px solid var(--gris-ui);
+}
+
+.footer__redes {
+  display: flex;
+  gap: 5rem;
+}
+
+.footer__icono {
+  width: 40px;
+  height: 40px;
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0.6em;
+    min-height: 60px;
+  }
+  .navbar__logo {
+    margin-right: 0;
+    margin-bottom: 0.8em;
+  }
+  .form-evento {
+    padding: 1.2rem 1rem;
+    margin: 1rem auto;
+    max-width: 100%;
+  }
+  .form-evento h2 {
+    font-size: 1.5rem;
+  }
+  .form-evento__tipo {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+  .form-evento__grupo--inline {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+  .form-evento__grupo--inline label {
+    width: 100%;
+    min-width: auto;
+  }
+  .form-dos-columnas {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  textarea {
+    height: 60px;
+  }
+  .footer__redes {
+    gap: 2rem;
+  }
+  .footer__icono {
+    width: 30px;
+    height: 30px;
+  }
+}

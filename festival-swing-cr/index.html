@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Registro de evento</title>
+    <link rel="icon" type="image/png" href="assets/imagenes/Logo.png" />
+    <link rel="stylesheet" href="assets/css/variables.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar__logo">
+        <img
+          src="assets/imagenes/Logo.png"
+          alt="Logo swingCR"
+          class="navbar__logo-img"
+        />
+      </div>
+      <ul class="navbar__menu">
+        <li>
+          <a href="index.html" class="navbar__link navbar__link">Inicio</a>
+        </li>
+        <li><a href="assets/html/eventos.html" class="navbar__link">Eventos</a></li>
+      </ul>
+    </nav>
+    <form class="form-evento">
+      <h2>Registra tu evento</h2>
+
+      <div class="form-evento__tipo">
+        <label for="radioClase"
+          ><input
+            id="radioClase"
+            type="radio"
+            name="tipoEvento"
+            value="clase"
+            checked
+          />
+          Clase</label
+        >
+        <label for="radioActividad"
+          ><input
+            id="radioActividad"
+            type="radio"
+            name="tipoEvento"
+            value="actividad"
+          />
+          Actividad</label
+        >
+      </div>
+
+      <div class="form-dos-columnas">
+        <div class="form-columna">
+          <!-- Columna izquierda -->
+          <div class="form-evento__grupo form-evento__grupo--inline">
+            <label for="dia"
+              >Día
+              <select id="dia" name="dia" required></select>
+            </label>
+            <label for="hora"
+              >Hora
+              <select id="hora" name="hora" required></select>
+            </label>
+          </div>
+
+          <div class="form-evento__grupo">
+            <label for="nombre"
+              >Nombre del organizador
+              <input
+                id="nombre"
+                type="text"
+                name="nombre"
+                placeholder="Carlos Ramírez"
+                required
+                maxlength="100"
+                minlength="3"
+                pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+"
+                title="Solo letras y espacios"
+              />
+            </label>
+          </div>
+
+          <div class="form-evento__grupo">
+            <label for="ubicacion"
+              >Ubicaciones disponibles
+              <select id="ubicacion" name="ubicacion" required></select>
+            </label>
+          </div>
+
+          <div class="form-evento__grupo">
+            <label for="estilo"
+              >Estilo
+              <select id="estilo" name="estilo" required></select>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-columna">
+          <!-- Columna derecha -->
+          <div class="form-evento__grupo" id="grupo-nivel">
+            <label for="nivel"
+              >Nivel
+              <select id="nivel" name="nivel" required></select>
+            </label>
+          </div>
+
+          <div class="form-evento__grupo" id="grupo-tipoActividad">
+            <label for="tipoActividad"
+              >Tipo de actividad
+              <select id="tipoActividad" name="tipoActividad" required></select>
+            </label>
+          </div>
+
+          <div
+            class="form-evento__grupo form-evento__grupo--inline"
+            id="grupo-banda"
+          >
+            <label for="duracion"
+              >Duración (minutos)
+              <select id="duracion" name="duracion" required></select>
+            </label>
+            <label for="check_p">
+              <input type="checkbox" id="check_p" /> Profesor
+            </label>
+            <label for="check_b">
+              <input type="checkbox" id="check_b" /> Banda
+            </label>
+          </div>
+
+          <div class="form-evento__grupo">
+            <label for="descripcion">Descripción opcional</label>
+            <textarea
+              id="descripcion"
+              name="descripcion"
+              placeholder="El evento consiste en ..."
+              rows="4"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit">Registrar evento</button>
+      <div id="mensajeEvento"></div>
+    </form>
+    <footer class="footer">
+      <div class="footer__redes">
+        <a href="https://facebook.com/" target="_blank">
+          <img
+            src="assets/imagenes/logo-facebook.png"
+            alt="Facebook"
+            class="footer__icono"
+          />
+        </a>
+        <a href="https://instagram.com/" target="_blank">
+          <img
+            src="assets/imagenes/logo-instagram.png"
+            alt="Instagram"
+            class="footer__icono"
+          />
+        </a>
+        <a href="https://wa.me/34600000000" target="_blank">
+          <img
+            src="assets/imagenes/logo-whatsapp.png"
+            alt="WhatsApp"
+            class="footer__icono"
+          />
+        </a>
+      </div>
+    </footer>
+    <script type="module" src="src/js/formulario.js"></script>
+  </body>
+</html>

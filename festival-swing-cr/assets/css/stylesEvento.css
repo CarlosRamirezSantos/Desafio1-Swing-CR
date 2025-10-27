@@ -1,0 +1,403 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Inter:wght@300;400&display=swap');
+@import url('./variables.css');
+
+html, body {
+  width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--crema-vintage);
+  font-family: 'Inter', sans-serif;
+  color: var(--azul-medianoche);
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  width: 100%;
+  background: var(--azul-medianoche);
+  border-bottom: 2.5px solid var(--gris-ui);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1.2em 3vw 1.2em 3vw;
+  min-height: 90px;
+  margin-bottom: 2.2rem;
+}
+
+.navbar__logo {
+  margin-right: 3rem;
+  display: flex;
+  align-items: center;
+}
+
+.navbar__logo-img {
+  height: 48px;
+  width: auto;
+  display: block;
+}
+
+.navbar__menu {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  gap: 2.6rem;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar__menu li {
+  display: flex;
+  align-items: center;
+}
+
+.navbar__link {
+  font-family: 'Oswald', Arial, sans-serif;
+  font-size: 1.35rem;
+  color: var(--amarillo-dorado);
+  background: none;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition: border-bottom 0.18s, color 0.18s;
+  padding-bottom: 0.09em;
+  border-bottom: 2.5px solid transparent;
+}
+
+.navbar__link:hover {
+  color: var(--amarillo-dorado);
+  border-bottom: 2.5px solid var(--amarillo-dorado);
+}
+
+.navbar__link--activo {
+  color: var(--amarillo-dorado);
+  border-bottom: none;
+}
+
+main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.tablon-eventos {
+  background-color: var(--crema-vintage);
+  max-width: 100vw;
+  padding: 2.5rem 0;
+  border-radius: 0;
+  box-shadow: none;
+  font-family: 'Inter', sans-serif;
+}
+
+.tablon-eventos__titulo {
+  font-family: 'Oswald', sans-serif; 
+  font-weight: 700;
+  font-size: 3.2rem;
+  color: var(--azul-medianoche);
+  text-align: center;
+  margin-bottom: 2.8rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.tablon-eventos__dia {
+  width: 96vw;
+  max-width: 1700px;
+  margin: 0 auto 3rem auto;
+  background: white;
+  border: 2px solid var(--amarillo-dorado);
+  border-radius: 16px;
+  padding: 2.8rem 2.2rem;
+  box-shadow: 0 8px 28px rgb(0 0 0 / 0.13);
+  overflow-x: auto;
+}
+
+.tablon-eventos__dia-titulo {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
+  font-size: 2.1rem;
+  color: var(--rojo-ladrillo);
+  border-bottom: 3px solid var(--amarillo-dorado);
+  padding-bottom: 0.6rem;
+  margin-bottom: 1.4rem;
+  letter-spacing: 1.2px;
+  text-align: left;
+}
+
+.tablon-eventos__tabla {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.08rem;
+  color: var(--azul-medianoche);
+  table-layout: fixed;
+  margin-top: 0.7rem;
+  min-width: 1440px;
+}
+
+.tablon-eventos__tabla th,
+.tablon-eventos__tabla td {
+  border: 1.5px solid var(--gris-texto);
+  width: 190px;
+  min-width: 190px;
+  max-width: 190px;
+  height: 54px;
+  min-height: 54px;
+  max-height: 54px;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  vertical-align: middle;
+  word-break: break-word;
+  text-align: center;
+}
+
+.tablon-eventos__tabla th:first-child,
+.tablon-eventos__tabla td:first-child {
+  width: 110px;
+  min-width: 110px;
+  max-width: 110px;
+}
+
+.tablon-eventos__celda-ocupada,
+.tablon-eventos__celda-libre {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: var(--gris-ui);
+}
+
+.tarjeta-evento {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  
+  align-items: center;       
+  width: 100%;
+  height: 100%;
+  background: var(--amarillo-dorado);
+  color: var(--azul-medianoche);
+  border-radius: 0;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 0.93rem;
+  line-height: 1.15;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.tarjeta-evento__id {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin: 0 0 0.16em 0;
+}
+
+.tarjeta-evento__titulo {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  margin: 0;
+}
+
+.tablon-eventos__celda-libre {
+  background-color: var(--gris-ui);
+  color: var(--azul-medianoche);
+  cursor: default;
+}
+
+.tablon-eventos__celda-libre--sobre {
+  background-color:  #5cfa6c; 
+  border: 1.8px solid #23c234;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.modal-evento {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(29, 45, 68, 0.85); 
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-evento__contenido {
+  background-color: white;
+  color: var(--azul-medianoche);
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  max-width: 500px;
+  width: 90%;
+  font-family: 'Inter', sans-serif;
+  border: 2px solid var(--amarillo-dorado); 
+}
+
+.modal-evento__cerrar {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 24px;
+  color: #888;
+  cursor: pointer;
+}
+
+.modal-evento__cerrar:hover {
+  color: var(--rojo-ladrillo); 
+}
+
+.modal-evento__contenido p {
+  margin: 8px 0;
+  font-size: 1.1rem;
+}
+
+.modal-evento__contenido strong {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  color: var(--rojo-ladrillo);
+}
+
+body {
+  overflow-x: hidden;
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 1em;
+  }
+
+  .navbar__logo {
+    margin-right: 0;
+    margin-bottom: 1em;
+  }
+
+  .navbar__menu {
+    gap: 1.5rem;
+    justify-content: center;
+  }
+
+  .tablon-eventos__titulo {
+    font-size: 2.2rem;
+    padding: 0 1rem;
+  }
+}
+
+.tablon-eventos__dia {
+  padding: 1.8rem 1rem;
+  width: calc(100vw - 2rem);
+}
+
+.tablon-eventos__tabla {
+  min-width: 100%;
+  width: auto;
+}
+
+@media (max-width: 768px) {
+  .tablon-eventos__dia {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tablon-eventos__tabla {
+    display: block;
+    width: max-content;
+  }
+
+  .tablon-eventos__tabla th,
+  .tablon-eventos__tabla td {
+    font-size: 0.95rem;
+    padding: 0.3rem 0.4rem;
+  }
+
+  .tarjeta-evento {
+    font-size: 0.85rem;
+  }
+
+  .tarjeta-evento__titulo {
+    font-size: 1rem;
+  }
+
+  .footer__redes {
+    gap: 2rem;
+  }
+  .footer__icono {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .modal-evento__contenido {
+    padding: 18px;
+    margin: 1rem;
+  }
+
+  .modal-evento__contenido h2 {
+    font-size: 1.5rem;
+  }
+
+  .modal-evento__contenido p {
+    font-size: 1rem;
+  }
+}
+
+#btn-borrar-evento {
+  background-color: var(--rojo-error); 
+  color: var(--crema-vintage);
+  border: none;
+  padding: 0.6em 1.2em;
+  border-radius: 8px;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.22s ease;
+  margin-top: 1.2rem;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#btn-borrar-evento:hover,
+#btn-borrar-evento:focus {
+  background-color: #c0392b;
+  outline: none;
+}
+
+.footer {
+  width: 100%;
+  background: var(--azul-medianoche);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+  margin-top: 1rem;
+  border-top: 2px solid var(--gris-ui);
+}
+
+.footer__redes {
+  display: flex;
+  gap: 5rem;
+}
+
+.footer__icono {
+  width: 40px;
+  height: 40px;
+}

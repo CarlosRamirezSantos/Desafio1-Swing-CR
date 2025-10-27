@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tablón de Eventos</title>
+    <link rel="icon" type="image/png" href="../imagenes/Logo.png" />
+    <link rel="stylesheet" href="../css/variables.css" />
+    <link rel="stylesheet" href="../css/stylesEvento.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar__logo">
+        <img
+          src="../imagenes/Logo.png"
+          alt="Logo swingCR"
+          class="navbar__logo-img"
+        />
+      </div>
+      <ul class="navbar__menu">
+        <li>
+          <a href="../../index.html" class="navbar__link navbar__link--activo"
+            >Inicio</a
+          >
+        </li>
+        <li><a href="eventos.html" class="navbar__link">Eventos</a></li>
+      </ul>
+    </nav>
+    <main>
+      <section class="tablon-eventos">
+        <h2 class="tablon-eventos__titulo">Programación del festival</h2>
+
+        <div class="tablon-eventos__dia" id="tablon-eventos__dia--10">
+          <h3 class="tablon-eventos__dia-titulo">Viernes 10</h3>
+          <table class="tablon-eventos__tabla" id="tabla-dia-10">
+            <thead>
+              <tr>
+                <th>Hora</th>
+                <th>Be Hopper</th>
+                <th>New Orleans</th>
+                <th>Savoy</th>
+                <th>Antiguo Casino</th>
+                <th>Parque de Gasset</th>
+                <th>Prado</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="tablon-eventos__dia" id="tablon-eventos__dia--11">
+          <h3 class="tablon-eventos__dia-titulo">Sábado 11</h3>
+          <table class="tablon-eventos__tabla" id="tabla-dia-11">
+            <thead>
+              <tr>
+                <th>Hora</th>
+                <th>Be Hopper</th>
+                <th>New Orleans</th>
+                <th>Savoy</th>
+                <th>Antiguo Casino</th>
+                <th>Parque de Gasset</th>
+                <th>Prado</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="tablon-eventos__dia" id="tablon-eventos__dia--12">
+          <h3 class="tablon-eventos__dia-titulo">Domingo 12</h3>
+          <table class="tablon-eventos__tabla" id="tabla-dia-12">
+            <thead>
+              <tr>
+                <th>Hora</th>
+                <th>Be Hopper</th>
+                <th>New Orleans</th>
+                <th>Savoy</th>
+                <th>Antiguo Casino</th>
+                <th>Parque de Gasset</th>
+                <th>Prado</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+    <div id="modal-evento" class="modal-evento">
+      <div class="modal-evento__contenido">
+        <span class="modal-evento__cerrar" id="cerrar-modal">&times;</span>
+        <p><strong>ID:</strong> <span id="modal-id"></span></p>
+        <p><strong>Nombre:</strong> <span id="modal-nombre"></span></p>
+        <p>
+          <strong>Descripción:</strong> <span id="modal-descripcion"></span>
+        </p>
+        <p><strong>Día:</strong> <span id="modal-dia"></span></p>
+        <p><strong>Hora:</strong> <span id="modal-hora"></span></p>
+        <p><strong>Ubicación:</strong> <span id="modal-ubicacion"></span></p>
+        <p><strong>Duración:</strong> <span id="modal-duracion"></span> min</p>
+        <p><strong>Estilo:</strong> <span id="modal-estilo"></span></p>
+        <p><strong>Profesor:</strong> <span id="modal-profesor"></span></p>
+        <p><strong>Nivel:</strong> <span id="modal-nivel"></span></p>
+        <p>
+          <strong>Tipo de actividad:</strong>
+          <span id="modal-tipo-actividad"></span>
+        </p>
+        <p><strong>Banda:</strong> <span id="modal-banda"></span></p>
+        <button id="btn-borrar-evento">Borrar Evento</button>
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="footer__redes">
+        <a href="https://facebook.com/" target="_blank" rel="noopener">
+          <img
+            src="../imagenes/logo-facebook.png"
+            alt="Facebook"
+            class="footer__icono"
+          />
+        </a>
+        <a href="https://instagram.com/" target="_blank" rel="noopener">
+          <img
+            src="../imagenes/logo-instagram.png"
+            alt="Instagram"
+            class="footer__icono"
+          />
+        </a>
+        <a href="https://wa.me/34600000000" target="_blank" rel="noopener">
+          <img
+            src="../imagenes/logo-whatsapp.png"
+            alt="WhatsApp"
+            class="footer__icono"
+          />
+        </a>
+      </div>
+    </footer>
+
+    <script type="module" src="../../src/js/eventos.js"></script>
+  </body>
+</html>
