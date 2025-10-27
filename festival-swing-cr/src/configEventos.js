@@ -13,6 +13,7 @@ export const diasConNombre = [
   { numero: 12, nombre: "Domingo 12" },
 ];
 
+// Genera horas en formato "HH:00" desde una hora de inicio hasta una de fin
 export const generarHoras = function (inicio, fin) {
   const horas = [];
   for (let h = inicio; h <= fin; h++) {
@@ -22,4 +23,5 @@ export const generarHoras = function (inicio, fin) {
   return horas;
 };
 
-export const horasDisponibles = generarHoras(10, 23);
+// Horas disponibles para eventos: de 10:00 a 23:00, EXCEPTO 15:00 (hora de la comida)
+export const horasDisponibles = generarHoras(10, 23).filter(hora => hora !== "15:00");
