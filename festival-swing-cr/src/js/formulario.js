@@ -1,10 +1,10 @@
-import { Clase } from "./models/Clase.js";
-import { Actividad } from "./models/Actividad.js";
+import { Clase } from "../models/Clase.js";
+import { Actividad } from "../models/Actividad.js";
 import {
   ubicaciones,
   diasConNombre,
   horasDisponibles,
-} from "./configEventos.js";
+} from "../js/configEventos.js";
 
 document.addEventListener("DOMContentLoaded", function () {
   // Obtenemos referencias a los elementos del formulario
