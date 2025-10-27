@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const estilos = ["Lindy Hop", "Shag", "Solo Jazz"];
   const niveles = ["Básico", "Intermedio", "Avanzado"];
   const tiposActividad = ["Taster", "Social", "Concierto", "Mix & Match"];
-  const horasUsables = horasDisponibles.filter(h => h !== "15:00");
+  const horasUsables = horasDisponibles.filter((h) => h !== "15:00");
 
   const agregarOpcionPorDefecto = (select, texto) => {
     select.innerHTML = "";
@@ -49,8 +49,11 @@ document.addEventListener("DOMContentLoaded", function () {
       grupoNivel.style.display = "";
       grupoTipoActividad.style.display = "none";
       tipoActividadSelect.required = false;
+      nivelSelect.required = true;
       descripcion.style.display = "none";
-      const labelDescripcion = document.querySelector('label[for="descripcion"]');
+      const labelDescripcion = document.querySelector(
+        'label[for="descripcion"]'
+      );
       if (labelDescripcion) labelDescripcion.style.display = "none";
       grupoBanda.style.display = "";
       const labelBanda = bandaCheckbox.closest("label");
@@ -60,9 +63,12 @@ document.addEventListener("DOMContentLoaded", function () {
       grupoNivel.style.display = "none";
       grupoTipoActividad.style.display = "";
       tipoActividadSelect.required = true;
+      nivelSelect.required = false;
       descripcion.style.display = "";
       grupoBanda.style.display = "";
-      const labelDescripcion = document.querySelector('label[for="descripcion"]');
+      const labelDescripcion = document.querySelector(
+        'label[for="descripcion"]'
+      );
       if (labelDescripcion) labelDescripcion.style.display = "";
       const labelBanda = bandaCheckbox.closest("label");
       if (labelBanda) labelBanda.style.display = "";
@@ -128,7 +134,10 @@ document.addEventListener("DOMContentLoaded", function () {
       if (evento.dia === dia) {
         let indiceEventoHora = horasUsables.indexOf(evento.hora);
         let siguienteHora = null;
-        if (indiceEventoHora >= 0 && indiceEventoHora < horasUsables.length - 1) {
+        if (
+          indiceEventoHora >= 0 &&
+          indiceEventoHora < horasUsables.length - 1
+        ) {
           siguienteHora = horasUsables[indiceEventoHora + 1];
         }
         if (evento.hora === hora) {
@@ -243,7 +252,18 @@ document.addEventListener("DOMContentLoaded", function () {
     if (dia === 10) {
       rangoPermitido = ["20:00", "21:00", "22:00", "23:00"];
     } else if (dia === 12) {
-      rangoPermitido = ["10:00","11:00","12:00","13:00","14:00","16:00","17:00","18:00","19:00","20:00"];
+      rangoPermitido = [
+        "10:00",
+        "11:00",
+        "12:00",
+        "13:00",
+        "14:00",
+        "16:00",
+        "17:00",
+        "18:00",
+        "19:00",
+        "20:00",
+      ];
     } else {
       rangoPermitido = horasUsables;
     }
@@ -351,6 +371,9 @@ document.addEventListener("DOMContentLoaded", function () {
     formEvento.reset();
     actualizarCampos();
     actualizarSelectDia();
+
+    actualizarSelectNivel();
+    actualizarSelectEstilo();
 
     if (radioClase.checked) {
       tipoActividadSelect.required = false;

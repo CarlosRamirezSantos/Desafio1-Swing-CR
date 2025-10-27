@@ -250,6 +250,12 @@ const abrirModalEvento = function (evento) {
   document.getElementById("modal-profesor").textContent = evento.profesor
     ? "Sí"
     : "No";
+  document.getElementById("modal-nivel").textContent = evento.nivel || "—";
+  document.getElementById("modal-tipo-actividad").textContent =
+    evento.tipo || "—";
+  document.getElementById("modal-banda").textContent = evento.banda 
+    ? "Sí"
+    : "No";
 };
 
 document.getElementById("cerrar-modal").onclick = () => {
